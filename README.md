@@ -5,7 +5,7 @@ Search for macOS® apps in the [homebrew cask](https://caskroom.github.io)
 catalog.
 
 For each search result, the publisher's original download location is shown.
-Press on the download URL to start download using your web browser.
+Press on the download URL to start downloading using your web browser.
 
 Implemented using the [Github API](https://developer.github.com) to search the
 [homebrew-cask repository](https://github.com/caskroom/homebrew-cask).
@@ -26,7 +26,7 @@ Implemented using the [Github API](https://developer.github.com) to search the
     GNU General Public License for more details.
   
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http:  www.gnu.org/licenses/>.
+    along with this program.  If not, see <http:www.gnu.org/licenses/>.
     Also add information on how to contact you by electronic and paper mail.
 
 
