@@ -1,0 +1,321 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0D4503741E2431CC00F5F4FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503731E2431CC00F5F4FE /* AppDelegate.swift */; };
+		0D4503761E2431CC00F5F4FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503751E2431CC00F5F4FE /* ViewController.swift */; };
+		0D4503781E2431CC00F5F4FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D4503771E2431CC00F5F4FE /* Assets.xcassets */; };
+		0D4503831E24321300F5F4FE /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503821E24321300F5F4FE /* Download.swift */; };
+		0D4503851E24323000F5F4FE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503841E24323000F5F4FE /* Search.swift */; };
+		0D4503881E24328700F5F4FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D4503861E24328700F5F4FE /* Main.storyboard */; };
+		0DB50FA61E7BEB9C00403196 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0DB50FA51E7BEB9C00403196 /* LICENSE */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0D0CEC4B1E4CECEC00AD34FD /* App Downloader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "App Downloader.entitlements"; sourceTree = "<group>"; };
+		0D4503701E2431CC00F5F4FE /* App Downloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Downloader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D4503731E2431CC00F5F4FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0D4503751E2431CC00F5F4FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0D4503771E2431CC00F5F4FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0D45037C1E2431CC00F5F4FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D4503821E24321300F5F4FE /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		0D4503841E24323000F5F4FE /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		0D4503871E24328700F5F4FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0DB50FA51E7BEB9C00403196 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0DB50FA71E7BECD000403196 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0D45036D1E2431CC00F5F4FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0D4503671E2431CC00F5F4FE = {
+			isa = PBXGroup;
+			children = (
+				0DB50FA71E7BECD000403196 /* README.md */,
+				0DB50FA51E7BEB9C00403196 /* LICENSE */,
+				0D4503721E2431CC00F5F4FE /* App Downloader */,
+				0D4503711E2431CC00F5F4FE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0D4503711E2431CC00F5F4FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0D4503701E2431CC00F5F4FE /* App Downloader.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0D4503721E2431CC00F5F4FE /* App Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				0D0CEC4B1E4CECEC00AD34FD /* App Downloader.entitlements */,
+				0D4503731E2431CC00F5F4FE /* AppDelegate.swift */,
+				0D4503751E2431CC00F5F4FE /* ViewController.swift */,
+				0D4503841E24323000F5F4FE /* Search.swift */,
+				0D4503821E24321300F5F4FE /* Download.swift */,
+				0D4503861E24328700F5F4FE /* Main.storyboard */,
+				0D4503771E2431CC00F5F4FE /* Assets.xcassets */,
+				0D45037C1E2431CC00F5F4FE /* Info.plist */,
+			);
+			path = "App Downloader";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0D45036F1E2431CC00F5F4FE /* App Downloader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D45037F1E2431CC00F5F4FE /* Build configuration list for PBXNativeTarget "App Downloader" */;
+			buildPhases = (
+				0D45036C1E2431CC00F5F4FE /* Sources */,
+				0D45036D1E2431CC00F5F4FE /* Frameworks */,
+				0D45036E1E2431CC00F5F4FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "App Downloader";
+			productName = "App Downloader";
+			productReference = 0D4503701E2431CC00F5F4FE /* App Downloader.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0D4503681E2431CC00F5F4FE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				TargetAttributes = {
+					0D45036F1E2431CC00F5F4FE = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 2AD47BTDQ6;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 0D45036B1E2431CC00F5F4FE /* Build configuration list for PBXProject "App Downloader" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0D4503671E2431CC00F5F4FE;
+			productRefGroup = 0D4503711E2431CC00F5F4FE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0D45036F1E2431CC00F5F4FE /* App Downloader */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0D45036E1E2431CC00F5F4FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DB50FA61E7BEB9C00403196 /* LICENSE in Resources */,
+				0D4503781E2431CC00F5F4FE /* Assets.xcassets in Resources */,
+				0D4503881E24328700F5F4FE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0D45036C1E2431CC00F5F4FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D4503831E24321300F5F4FE /* Download.swift in Sources */,
+				0D4503851E24323000F5F4FE /* Search.swift in Sources */,
+				0D4503761E2431CC00F5F4FE /* ViewController.swift in Sources */,
+				0D4503741E2431CC00F5F4FE /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0D4503861E24328700F5F4FE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0D4503871E24328700F5F4FE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0D45037D1E2431CC00F5F4FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0D45037E1E2431CC00F5F4FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		0D4503801E2431CC00F5F4FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "App Downloader/App Downloader.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2AD47BTDQ6;
+				INFOPLIST_FILE = "App Downloader/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.yep.appdownloader;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		0D4503811E2431CC00F5F4FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "App Downloader/App Downloader.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2AD47BTDQ6;
+				INFOPLIST_FILE = "App Downloader/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.yep.appdownloader;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0D45036B1E2431CC00F5F4FE /* Build configuration list for PBXProject "App Downloader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D45037D1E2431CC00F5F4FE /* Debug */,
+				0D45037E1E2431CC00F5F4FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0D45037F1E2431CC00F5F4FE /* Build configuration list for PBXNativeTarget "App Downloader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D4503801E2431CC00F5F4FE /* Debug */,
+				0D4503811E2431CC00F5F4FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0D4503681E2431CC00F5F4FE /* Project object */;
+}
