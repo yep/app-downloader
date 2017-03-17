@@ -7,10 +7,20 @@ catalog.
 For each search result, the publisher's original download location is shown.
 Press on the download URL to start downloading using your web browser.
 
+![Screenshot](https://github.com/yep/app-downloader/raw/master/screenshot.png)
+
 Implemented using the [Github API](https://developer.github.com) to search the
 [homebrew-cask repository](https://github.com/caskroom/homebrew-cask).
 
-![Screenshot](https://github.com/yep/app-downloader/raw/master/screenshot.png)
+
+Install
+-------
+
+Download latest release from the [release page](https://github.com/yep/app-downloader/releases).
+
+
+License
+-------
 
 
     Copyright (C) 2017 Jahn Bertsch
