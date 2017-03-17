@@ -10,6 +10,8 @@ Press on the download URL to start download using your web browser.
 Implemented using the [Github API](https://developer.github.com) to search the
 [homebrew-cask repository](https://github.com/caskroom/homebrew-cask).
 
+![Screenshot](https://github.com/yep/app-downloader/raw/master/screenshot.png)
+
 
     Copyright (C) 2017 Jahn Bertsch
   
