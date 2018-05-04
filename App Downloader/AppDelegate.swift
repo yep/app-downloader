@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  AppDownloader
 //
-//  Copyright (C) 2017 Jahn Bertsch
+//  Copyright (C) 2017, 2018 Jahn Bertsch
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
     }
@@ -31,6 +30,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-    
 }
 

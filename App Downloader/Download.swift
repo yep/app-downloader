@@ -2,7 +2,7 @@
 //  Download.swift
 //  AppDownloader
 //
-//  Copyright (C) 2017 Jahn Bertsch
+//  Copyright (C) 2017, 2018 Jahn Bertsch
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -22,18 +22,17 @@
 import Foundation
 import AppKit
 
-protocol DownloadLocationDelegate {
+protocol DownloadLocationDelegate: class {
     func downloadLocationError(messageText: String, informativeText: String)
     func downloadLocationFound(url: URL)
 }
 
 class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
-
     private let config = URLSessionConfiguration.default
     private var session: URLSession?
     private var downloadLocationTask: URLSessionDownloadTask?
     
-    public var delegate: DownloadLocationDelegate? = nil
+    public weak var delegate: DownloadLocationDelegate? = nil
     
     override init() {
         super.init()
@@ -47,7 +46,7 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
 
     // MARK: - get download location
 
-    func getDownloadLocationCompletionHandler(dataOptional: Data?, responseOptional: URLResponse?, errorOptional: Error?) {
+    fileprivate func getDownloadLocationCompletionHandler(dataOptional: Data?, responseOptional: URLResponse?, errorOptional: Error?) {
         if let error = errorOptional {
             delegate?.downloadLocationError(messageText: "Download Location Unknown", informativeText: error.localizedDescription)
         } else {
@@ -57,7 +56,7 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
         }
     }
     
-    func parseDownloadLocation(data: Data) {
+    fileprivate func parseDownloadLocation(data: Data) {
         do {
             let json = try JSONSerialization.jsonObject(with: data) as! [String: AnyObject]
             parseDownloadLocation(json: json)
@@ -65,9 +64,8 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
             delegate?.downloadLocationError(messageText: "Error", informativeText: "JSON decoding failed: \(error.localizedDescription)")
         }
     }
-
     
-    func parseDownloadLocation(json: [String: AnyObject]) {
+    fileprivate func parseDownloadLocation(json: [String: AnyObject]) {
         if let downloadUrl = json["download_url"] as? String {
             if let url = URL(string: downloadUrl) {
                 let task = session?.dataTask(with: url, completionHandler: getCaskFileCompletionHandler)
@@ -78,7 +76,7 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
     
     // MARK: - get cask file
     
-    func getCaskFileCompletionHandler(dataOptional: Data?, responseOptional: URLResponse?, errorOptional: Error?) {
+    fileprivate func getCaskFileCompletionHandler(dataOptional: Data?, responseOptional: URLResponse?, errorOptional: Error?) {
         if let error = errorOptional {
             delegate?.downloadLocationError(messageText: "Download failed", informativeText: error.localizedDescription)
         } else {
@@ -90,7 +88,7 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
         }
     }
     
-    func parse(caskFile: String) {
+    fileprivate func parse(caskFile: String) {
         let (version, _) = parseCaskFile(caskFile: caskFile)
         
         if var downloadUrl = extract(searchString: "url", from: caskFile) {
@@ -110,7 +108,7 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
 
     // MARK: - private
 
-    private func parseCaskFile(caskFile: String) -> (String, String) {
+    fileprivate func parseCaskFile(caskFile: String) -> (String, String) {
         var version = "", sha256 = ""
         let caskFileLines = caskFile.components(separatedBy: .newlines)
         
@@ -128,7 +126,7 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
         return (version, sha256)
     }
     
-    private func replace(version: String, in source: String) -> String {
+    fileprivate func replace(version: String, in source: String) -> String {
         let (major, minor, patch, patchOnly, beforeComma, afterComma, afterCommaBeforeColon, afterColon) = split(version: version)
         
         var result = source.replacingOccurrences(of: "#{version}", with: version)
@@ -155,7 +153,7 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
     private func split(version: String) -> (String, String, String, String, String, String, String, String) {
         var versionMajor = "", versionMinor = "", versionPatch = "", versionPatchOnly = "", beforeComma = "", afterComma = "", afterCommaBeforeColon = "", afterColon = ""
 
-        let versionArray = version.characters.split(separator: ".")
+        let versionArray = version.split(separator: ".")
 
         if versionArray.count >= 3 {
             versionPatch = String(versionArray[2])
@@ -167,23 +165,23 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
             versionMajor = String(versionArray[0])
         }
         
-        let patchArray = versionPatch.characters.split(separator: "-")
+        let patchArray = versionPatch.split(separator: "-")
         if patchArray.count > 0 {
             versionPatchOnly = String(patchArray[0])
         }
         
-        let commaArray = version.characters.split(separator: ",")
+        let commaArray = version.split(separator: ",")
         if commaArray.count > 1 {
             beforeComma = String(commaArray[0])
             afterComma  = String(commaArray[1])
             
-            let beforeColonArray = afterComma.characters.split(separator: ":")
+            let beforeColonArray = afterComma.split(separator: ":")
             if beforeColonArray.count > 1 {
                 afterCommaBeforeColon = String(beforeColonArray[0])
             }
         }
 
-        let colonArray = version.characters.split(separator: ":")
+        let colonArray = version.split(separator: ":")
         if colonArray.count > 1 {
             afterColon = String(colonArray[1])
         }
@@ -191,10 +189,10 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
         return (versionMajor, versionMinor, versionPatch, versionPatchOnly, beforeComma, afterComma, afterCommaBeforeColon, afterColon)
     }
     
-    private func extract(searchString: String, from source: String) -> String? {
+    fileprivate func extract(searchString: String, from source: String) -> String? {
         if let sourceLine = extractTextLine(containingString: searchString, in: source) {
             let sourceLineWithoutSpaces = sourceLine.replacingOccurrences(of: ", '", with: ",'")
-            var sourceArray = sourceLineWithoutSpaces.characters.split(separator: " ").map(String.init)
+            var sourceArray = sourceLineWithoutSpaces.split(separator: " ").map(String.init)
             if sourceArray.count == 2 {
                 return trim(sourceArray[1])
             }
@@ -203,11 +201,11 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
         return nil
     }
     
-    private func trim(_ source: String) -> String {
+    fileprivate func trim(_ source: String) -> String {
         return source.trimmingCharacters(in: CharacterSet(charactersIn: ",\"'\n"))
     }
     
-    private func extractTextLine(containingString searchString: String, in sourceString: String) -> String? {
+    fileprivate func extractTextLine(containingString searchString: String, in sourceString: String) -> String? {
         if let searchRange = sourceString.range(of: searchString) {
             return sourceString.substring(with: sourceString.lineRange(for: searchRange))
         }

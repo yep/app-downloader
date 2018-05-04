@@ -1,29 +1,29 @@
-App Downloader
-==============
+# App Downloader
+
 
 Search for macOS® apps in the [homebrew cask](https://caskroom.github.io)
 catalog.
 
+![Screencast](https://github.com/yep/app-downloader/raw/master/app-downloader-screencast.gif)
+
 For each search result, the publisher's original download location is shown.
 Press on the download URL to start downloading using your web browser.
-
-![Screenshot](https://github.com/yep/app-downloader/raw/master/screenshot.png)
 
 Implemented using the [Github API](https://developer.github.com) to search the
 [homebrew-cask repository](https://github.com/caskroom/homebrew-cask).
 
-
-Install
--------
-
-Download latest release from the [release page](https://github.com/yep/app-downloader/releases).
+Download locations are maintained by thousands of [homebrew-cask contributors](https://github.com/caskroom/homebrew-cask/graphs/contributors).
 
 
-License
--------
+## Download
+
+Get the latest version from the [release page](https://github.com/yep/app-downloader/releases).
 
 
-    Copyright (C) 2017 Jahn Bertsch
+## License
+
+
+    Copyright (C) 2017, 2018 Jahn Bertsch
   
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ License
     GNU General Public License for more details.
   
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http:www.gnu.org/licenses/>.
+    along with this program. If not, see <http:www.gnu.org/licenses/>.
     Also add information on how to contact you by electronic and paper mail.
 
 

@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  AppDownloader
 //
-//  Copyright (C) 2017 Jahn Bertsch
+//  Copyright (C) 2017, 2018 Jahn Bertsch
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -35,29 +35,21 @@ struct SearchResult {
 }
 
 class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSSearchFieldDelegate, SearchDelegate, DownloadLocationDelegate {
-    
     @IBOutlet weak var searchField: NSSearchField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var statusTextField: NSTextField!
     @IBOutlet weak var button: NSButton!
     
     private let cellIdentifier = "searchResultCellIdentifier"
-    private let defaultStatusString = "Enter app name and press \"search\" button."
-    private let search: SearchProtocol
-    private let download: DownloadLocationProtocol
+    private let defaultStatusString = "Enter app name and press \"Search\" button."
+    private let search = Search()
+    private let download = Download()
     private var searchResults: [SearchResult] = []
     private var searchStartedByButtonPress = false
     private var timer: Timer?
     
     required init?(coder: NSCoder) {
-        let search = Search() // can not be assigned to self.search directly
-        let download = Download()
-        
-        self.search = search
-        self.download = download
-        
         super.init(coder: coder)
-        
         search.delegate = self
         download.delegate = self
     }
@@ -194,7 +186,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
     
     func resetSearchResults(statusText: String) {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+        DispatchQueue.main.async {
             self.searchResults = []
             self.tableView.reloadData()
             self.searchStartedByButtonPress = false
@@ -203,10 +195,11 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
     
     func display(searchResults: [SearchResult]) {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+        DispatchQueue.main.async {
             self.searchResults = searchResults
             self.tableView.reloadData()
             self.button.isEnabled = true
+            
             self.statusTextField.stringValue = "\(searchResults.count) result"
             if searchResults.count > 1 {
                 self.statusTextField.stringValue = self.statusTextField.stringValue + "s"
@@ -231,8 +224,9 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     func downloadLocationFound(url: URL) {
         let font = NSFont.systemFont(ofSize: 13)
-        let text = "Click link to start download:<br /><a href=\"\(url.absoluteString)\">\(url.absoluteString)</a>"
-        let html = String(format: "<span style=\"font-family:'\(font.fontName)'; font-size:\(font.pointSize);\">\(text)</span>")
+        let text = "Press URL to start download:<br /><a href=\"\(url.absoluteString)\">\(url.absoluteString)</a>"
+        let html = "<span style=\"font-family:'\(font.fontName)'; font-size:\(font.pointSize);\">\(text)</span>"
+        
         if let data = html.data(using: .utf8) {
             if let string = NSAttributedString(html: data, options: [:], documentAttributes: nil) {
                 statusTextField.attributedStringValue = string
@@ -245,6 +239,5 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             editor.selectedRange = NSMakeRange(0, 0)
         }
     }
-    
 }
 

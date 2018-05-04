@@ -2,7 +2,7 @@
 //  Search.swift
 //  AppDownloader
 //
-//  Copyright (C) 2017 Jahn Bertsch
+//  Copyright (C) 2017, 2018 Jahn Bertsch
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -21,18 +21,17 @@
 
 import Foundation
 
-protocol SearchDelegate {
+protocol SearchDelegate: class {
     func searchError(messageText: String, informativeText: String)
     func resetSearchResults(statusText: String)
     func display(searchResults: [SearchResult])
 }
 
 class Search: SearchProtocol {
-
     private let config: URLSessionConfiguration
     private let session: URLSession
     
-    public var delegate: SearchDelegate? = nil
+    public weak var delegate: SearchDelegate? = nil
     
     init() {
         config = URLSessionConfiguration.default
@@ -46,34 +45,39 @@ class Search: SearchProtocol {
         }
     }
     
-    func searchCompletionHandler(dataOptional: Data?, responseOptional: URLResponse?, errorOptional: Error?) {
-        if let error = errorOptional {
+    // MARK: - private
+    
+    fileprivate func searchCompletionHandler(data: Data?, response: URLResponse?, error: Error?) {
+        if let error = error {
             delegate?.searchError(messageText: "Search Error", informativeText: error.localizedDescription)
-        } else {
-            if let data = dataOptional {
-                parseSearchResult(data: data)
+        } else if let data = data {
+            do {
+                let jsonObject = try JSONSerialization.jsonObject(with: data) as! [String: AnyObject]
+                handle(jsonObject: jsonObject)
+            } catch {
+                delegate?.searchError(messageText: "Search Error", informativeText: "JSON decoding failed: \(error.localizedDescription)")
             }
         }
     }
     
-    func parseSearchResult(data: Data) {
-        do {
-            let json = try JSONSerialization.jsonObject(with: data) as! [String: AnyObject]
-            parseSearchResult(json: json)
-        } catch {
-            delegate?.searchError(messageText: "Search Error", informativeText: "JSON decoding failed: \(error.localizedDescription)")
-        }
+    fileprivate func handle(jsonObject: [String: AnyObject]) {
+        let jsonSearchResults = extractJsonSearchResults(jsonObject)
+        var searchResults = extractSearchResults(jsonSearchResults)
+        sortByName(&searchResults)
+        delegate?.display(searchResults: searchResults) // done
     }
-    
-    func parseSearchResult(json: [String: AnyObject]) {
+
+    fileprivate func extractJsonSearchResults(_ json: [String : AnyObject]) -> NSArray {
+        var jsonSearchResults = NSArray()
+        
         if let totalCount = json["total_count"] as? Int {
             if totalCount == 0 {
                 delegate?.resetSearchResults(statusText: "No search results")
             } else {
                 for (key, value) in json {
                     if key == "items" {
-                        if let itemsArray = value as? NSArray {
-                            parseSearchResult(itemsArray: itemsArray)
+                        if let jsonSearchResultsArray = value as? NSArray {
+                            jsonSearchResults = jsonSearchResultsArray
                         }
                     }
                 }
@@ -81,17 +85,19 @@ class Search: SearchProtocol {
         } else {
             delegate?.resetSearchResults(statusText: "No search results")
         }
+        
+        return jsonSearchResults
     }
     
-    func parseSearchResult(itemsArray: NSArray) {
+    fileprivate func extractSearchResults(_ jsonSearchResultItemsArray: NSArray) -> [SearchResult] {
         var searchResults: [SearchResult] = []
         
-        for itemArrayElement in itemsArray {
+        for itemArrayElement in jsonSearchResultItemsArray {
             if let item = itemArrayElement as? [String: AnyObject] {
                 if let name = item["name"] as? String {
-                    let suffix = name.substring(from: name.index(name.characters.endIndex, offsetBy: -3))
+                    let suffix = name.substring(from: name.index(name.endIndex, offsetBy: -3))
                     if suffix == ".rb" {
-                        let nameWithoutSuffix = name.substring(to: name.index(name.characters.endIndex, offsetBy: -3))
+                        let nameWithoutSuffix = name.substring(to: name.index(name.endIndex, offsetBy: -3))
                         
                         if let urlString = item["url"] as? String {
                             if let url = URL(string: urlString) {
@@ -104,6 +110,10 @@ class Search: SearchProtocol {
             }
         }
         
+        return searchResults
+    }
+    
+    fileprivate func sortByName(_ searchResults: inout [SearchResult]) {
         searchResults.sort { (a, b) -> Bool in
             if a.name < b.name {
                 return true
@@ -111,8 +121,5 @@ class Search: SearchProtocol {
                 return false
             }
         }
-        
-        delegate?.display(searchResults: searchResults)
     }
-
 }
