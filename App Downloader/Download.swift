@@ -20,7 +20,6 @@
 //
 
 import Foundation
-import AppKit
 
 protocol DownloadLocationDelegate: class {
     func downloadLocationError(messageText: String, informativeText: String)

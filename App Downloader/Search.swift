@@ -39,7 +39,7 @@ class Search: SearchProtocol {
     }
     
     func startSearch(searchString: String) {
-        if let url = URL(string: "https://api.github.com/search/code?q=repo:caskroom/homebrew-cask+" + searchString) {
+        if let url = URL(string: "https://api.github.com/search/code?q=repo:homebrew/homebrew-cask+" + searchString) {
             let task = session.dataTask(with: url, completionHandler: searchCompletionHandler)
             task.resume() // do the search
         }
