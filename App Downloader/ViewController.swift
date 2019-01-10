@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  AppDownloader
 //
-//  Copyright (C) 2017, 2018 Jahn Bertsch
+//  Copyright (C) 2017-2019 Jahn Bertsch
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -34,6 +34,21 @@ struct SearchResult {
     let url: URL
 }
 
+extension NSColor {
+    static var labelColorHexString: String {
+        get {
+            var hexColor = "#000000"
+            if let color = NSColor.labelColor.usingColorSpace(.deviceRGB) {
+                let red = Int(round(color.redComponent * color.alphaComponent * 0xFF))
+                let green = Int(round(color.greenComponent * color.alphaComponent * 0xFF))
+                let blue = Int(round(color.blueComponent * color.alphaComponent * 0xFF))
+                hexColor = String(format: "#%02X%02X%02X", red, green, blue)
+            }
+            return hexColor
+        }
+    }
+}
+
 class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSSearchFieldDelegate, SearchDelegate, DownloadLocationDelegate {
     @IBOutlet weak var searchField: NSSearchField!
     @IBOutlet weak var tableView: NSTableView!
@@ -43,7 +58,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     private let cellIdentifier = "searchResultCellIdentifier"
     private let defaultStatusString = "Enter app name and press \"Search\" button."
     private let search = Search()
-    private let download = Download()
+    private let download = DownloadLocation()
     private var searchResults: [SearchResult] = []
     private var searchStartedByButtonPress = false
     private var timer: Timer?
@@ -128,7 +143,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     // MARK: - NSSearchFieldDelegate
     
-    override func controlTextDidChange(_ obj: Notification) {
+    func controlTextDidChange(_ obj: Notification) {
         textFieldChanged()
     }
     
@@ -150,7 +165,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        if let cell = tableView.make(withIdentifier: cellIdentifier, owner: nil) as? NSTableCellView {
+        if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier), owner: nil) as? NSTableCellView {
             cell.textField?.stringValue = searchResults[row].name
             return cell
         }
@@ -162,7 +177,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         if tableView.selectedRowIndexes.count == 0 {
             statusTextField.stringValue = ""
         } else if tableView.selectedRowIndexes.count == 1 {
-            self.statusTextField.stringValue = "Getting \"\(searchResults[tableView.selectedRow].name)\" download link..."
+            self.statusTextField.stringValue = "Getting download URL for \"\(searchResults[tableView.selectedRow].name)\"..."
             
             if timer == nil {
                 timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer: Timer) in
@@ -225,19 +240,18 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     func downloadLocationFound(url: URL) {
         let font = NSFont.systemFont(ofSize: 13)
         let text = "Press URL to start download:<br /><a href=\"\(url.absoluteString)\">\(url.absoluteString)</a>"
-        let html = "<span style=\"font-family:'\(font.fontName)'; font-size:\(font.pointSize);\">\(text)</span>"
+        let html = "<span style=\"font-family:'\(font.fontName)'; font-size:\(font.pointSize); color:\(NSColor.labelColorHexString);\">\(text)</span>"
         
-        if let data = html.data(using: .utf8) {
-            if let string = NSAttributedString(html: data, options: [:], documentAttributes: nil) {
-                statusTextField.attributedStringValue = string
-            }
+        if let data = html.data(using: .utf8),
+            let string = NSAttributedString(html: data, options: [NSAttributedString.DocumentReadingOptionKey: Any](), documentAttributes: nil)
+        {
+            statusTextField.attributedStringValue = string
         }
         
-        // show pointing finger cursor when hovering over url by simulating a click into the text field
+        // show pointing finger cursor when hovering over url by simulating a selection in the text field
         statusTextField.selectText(nil)
         if let editor = statusTextField.currentEditor() {
             editor.selectedRange = NSMakeRange(0, 0)
         }
     }
 }
-

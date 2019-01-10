@@ -10,7 +10,7 @@
 		0D4503741E2431CC00F5F4FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503731E2431CC00F5F4FE /* AppDelegate.swift */; };
 		0D4503761E2431CC00F5F4FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503751E2431CC00F5F4FE /* ViewController.swift */; };
 		0D4503781E2431CC00F5F4FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D4503771E2431CC00F5F4FE /* Assets.xcassets */; };
-		0D4503831E24321300F5F4FE /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503821E24321300F5F4FE /* Download.swift */; };
+		0D4503831E24321300F5F4FE /* DownloadLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503821E24321300F5F4FE /* DownloadLocation.swift */; };
 		0D4503851E24323000F5F4FE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503841E24323000F5F4FE /* Search.swift */; };
 		0D4503881E24328700F5F4FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D4503861E24328700F5F4FE /* Main.storyboard */; };
 		0DB50FA61E7BEB9C00403196 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0DB50FA51E7BEB9C00403196 /* LICENSE */; };
@@ -23,7 +23,7 @@
 		0D4503751E2431CC00F5F4FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0D4503771E2431CC00F5F4FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D45037C1E2431CC00F5F4FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0D4503821E24321300F5F4FE /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		0D4503821E24321300F5F4FE /* DownloadLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadLocation.swift; sourceTree = "<group>"; };
 		0D4503841E24323000F5F4FE /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		0D4503871E24328700F5F4FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0DB50FA51E7BEB9C00403196 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 				0D4503731E2431CC00F5F4FE /* AppDelegate.swift */,
 				0D4503751E2431CC00F5F4FE /* ViewController.swift */,
 				0D4503841E24323000F5F4FE /* Search.swift */,
-				0D4503821E24321300F5F4FE /* Download.swift */,
+				0D4503821E24321300F5F4FE /* DownloadLocation.swift */,
 				0D4503861E24328700F5F4FE /* Main.storyboard */,
 				0D4503771E2431CC00F5F4FE /* Assets.xcassets */,
 				0D45037C1E2431CC00F5F4FE /* Info.plist */,
@@ -105,10 +105,12 @@
 				TargetAttributes = {
 					0D45036F1E2431CC00F5F4FE = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 2AD47BTDQ6;
-						LastSwiftMigration = 0930;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.HardenedRuntime = {
+								enabled = 1;
+							};
 							com.apple.Sandbox = {
 								enabled = 1;
 							};
@@ -152,7 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D4503831E24321300F5F4FE /* Download.swift in Sources */,
+				0D4503831E24321300F5F4FE /* DownloadLocation.swift in Sources */,
 				0D4503851E24323000F5F4FE /* Search.swift in Sources */,
 				0D4503761E2431CC00F5F4FE /* ViewController.swift in Sources */,
 				0D4503741E2431CC00F5F4FE /* AppDelegate.swift in Sources */,
@@ -286,12 +288,13 @@
 				CODE_SIGN_ENTITLEMENTS = "App Downloader/App Downloader.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2AD47BTDQ6;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "App Downloader/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.yep.appdownloader;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.yep.App-Downloader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -302,12 +305,13 @@
 				CODE_SIGN_ENTITLEMENTS = "App Downloader/App Downloader.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2AD47BTDQ6;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "App Downloader/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.yep.appdownloader;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.yep.App-Downloader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

@@ -2,7 +2,7 @@
 //  Download.swift
 //  AppDownloader
 //
-//  Copyright (C) 2017, 2018 Jahn Bertsch
+//  Copyright (C) 2017-2019 Jahn Bertsch
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ protocol DownloadLocationDelegate: class {
     func downloadLocationFound(url: URL)
 }
 
-class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
+class DownloadLocation: NSObject, URLSessionDelegate, DownloadLocationProtocol {
     private let config = URLSessionConfiguration.default
     private var session: URLSession?
     private var downloadLocationTask: URLSessionDownloadTask?
@@ -48,28 +48,31 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
     fileprivate func getDownloadLocationCompletionHandler(dataOptional: Data?, responseOptional: URLResponse?, errorOptional: Error?) {
         if let error = errorOptional {
             delegate?.downloadLocationError(messageText: "Download Location Unknown", informativeText: error.localizedDescription)
-        } else {
-            if let data = dataOptional {
-                parseDownloadLocation(data: data)
-            }
+        } else if let data = dataOptional {
+            parseDownloadLocation(data: data)
         }
     }
     
     fileprivate func parseDownloadLocation(data: Data) {
         do {
-            let json = try JSONSerialization.jsonObject(with: data) as! [String: AnyObject]
-            parseDownloadLocation(json: json)
+            if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] {
+                parseDownloadLocation(json: json)
+            } else {
+                delegate?.downloadLocationError(messageText: "Error", informativeText: "JSON decoding of download location failed")
+            }
         } catch {
-            delegate?.downloadLocationError(messageText: "Error", informativeText: "JSON decoding failed: \(error.localizedDescription)")
+            delegate?.downloadLocationError(messageText: "Error", informativeText: "JSON decoding of download location failed: \(error.localizedDescription)")
         }
     }
     
     fileprivate func parseDownloadLocation(json: [String: AnyObject]) {
-        if let downloadUrl = json["download_url"] as? String {
-            if let url = URL(string: downloadUrl) {
-                let task = session?.dataTask(with: url, completionHandler: getCaskFileCompletionHandler)
-                task?.resume()
-            }
+        if let downloadUrl = json["download_url"] as? String,
+            let url = URL(string: downloadUrl)
+        {
+            let task = session?.dataTask(with: url, completionHandler: getCaskFileCompletionHandler)
+            task?.resume()
+        } else {
+            delegate?.downloadLocationError(messageText: "Error", informativeText: "JSON decoding of download URL failed")
         }
     }
     
@@ -78,49 +81,41 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
     fileprivate func getCaskFileCompletionHandler(dataOptional: Data?, responseOptional: URLResponse?, errorOptional: Error?) {
         if let error = errorOptional {
             delegate?.downloadLocationError(messageText: "Download failed", informativeText: error.localizedDescription)
-        } else {
-            if let data = dataOptional {
-                if let caskFile = String(data: data, encoding: .utf8) {
-                    parse(caskFile: caskFile)
-                }
-            }
-        }
-    }
-    
-    fileprivate func parse(caskFile: String) {
-        let (version, _) = parseCaskFile(caskFile: caskFile)
-        
-        if var downloadUrl = extract(searchString: "url", from: caskFile) {
-            downloadUrl = replace(version: version, in: downloadUrl)
+        } else if let data = dataOptional, let caskFile = String(data: data, encoding: .utf8) {
+            let (version, _) = parse(caskFileString: caskFile)
             
-            if let url = URL(string: downloadUrl) {
-                delegate?.downloadLocationFound(url: url)
+            if var downloadUrl = extract(searchString: "url", from: caskFile) {
+                downloadUrl = replace(version: version, in: downloadUrl)
+                
+                if let url = URL(string: downloadUrl) {
+                    delegate?.downloadLocationFound(url: url)
+                } else {
+                    delegate?.downloadLocationError(messageText: "Unknown Download URL", informativeText: "Unknown download URL for version \(version):\n\n\(downloadUrl)")
+                }
             } else {
-                delegate?.downloadLocationError(messageText: "Unknown Download URL", informativeText: "Unknown download URL for version \(version):\n\n\(downloadUrl)")
-                print(caskFile)
+                delegate?.downloadLocationError(messageText: "Unknown Download URL", informativeText: "Could not find download location.")
             }
-        } else {
-            delegate?.downloadLocationError(messageText: "Unknown Download URL", informativeText: "Could not find download location.")
-            print(caskFile)
         }
     }
 
     // MARK: - private
 
-    fileprivate func parseCaskFile(caskFile: String) -> (String, String) {
+    fileprivate func parse(caskFileString: String) -> (String, String) {
         var version = "", sha256 = ""
-        let caskFileLines = caskFile.components(separatedBy: .newlines)
+        let caskFileLines = caskFileString.components(separatedBy: .newlines)
         
         for line in caskFileLines {
-            if let extractedVersion = extract(searchString: "version '", from: line) {
-                version = extractedVersion
+            if let temp = extract(searchString: "version '", from: line) {
+                version = temp
             }
-            if let extractedSha256 = extract(searchString: "sha256 '", from: line) {
-                sha256 = extractedSha256 // currently unused
+            if let temp = extract(searchString: "sha256 '", from: line) {
+                sha256 = temp // currently unused
             }
         }
         
-        // print("\nversion: \(version), sha256: \(sha256)")
+        #if DEBUG
+        print("version: \(version)\nsha256: \(sha256)\n")
+        #endif
 
         return (version, sha256)
     }
@@ -188,12 +183,12 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
         return (versionMajor, versionMinor, versionPatch, versionPatchOnly, beforeComma, afterComma, afterCommaBeforeColon, afterColon)
     }
     
-    fileprivate func extract(searchString: String, from source: String) -> String? {
-        if let sourceLine = extractTextLine(containingString: searchString, in: source) {
-            let sourceLineWithoutSpaces = sourceLine.replacingOccurrences(of: ", '", with: ",'")
-            var sourceArray = sourceLineWithoutSpaces.split(separator: " ").map(String.init)
-            if sourceArray.count == 2 {
-                return trim(sourceArray[1])
+    fileprivate func extract(searchString: String, from sourceString: String) -> String? {
+        if var textLine = extractTextLine(containingString: searchString, in: sourceString) {
+            textLine = textLine.replacingOccurrences(of: ", '", with: ",'")
+            let textArray = textLine.split(separator: " ").map(String.init)
+            if textArray.count == 2 {
+                return trim(textArray[1])
             }
         }
         
@@ -206,10 +201,9 @@ class Download: NSObject, URLSessionDelegate, DownloadLocationProtocol {
     
     fileprivate func extractTextLine(containingString searchString: String, in sourceString: String) -> String? {
         if let searchRange = sourceString.range(of: searchString) {
-            return sourceString.substring(with: sourceString.lineRange(for: searchRange))
+            return String(sourceString[sourceString.lineRange(for: searchRange)])
         }
         
         return nil
     }
-    
 }

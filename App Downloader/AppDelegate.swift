@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  AppDownloader
 //
-//  Copyright (C) 2017, 2018 Jahn Bertsch
+//  Copyright (C) 2017-2019 Jahn Bertsch
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by

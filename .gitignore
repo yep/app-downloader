@@ -1,3 +1,7 @@
+artwork
+*.zip
+*.swp
+
 # Xcode
 .DS_Store
 */build/*
@@ -16,3 +20,4 @@ DerivedData
 .idea/
 *.hmap
 *.xccheckout
+IDEWorkspaceChecks.plist

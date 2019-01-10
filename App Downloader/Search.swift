@@ -2,7 +2,7 @@
 //  Search.swift
 //  AppDownloader
 //
-//  Copyright (C) 2017, 2018 Jahn Bertsch
+//  Copyright (C) 2017-2019 Jahn Bertsch
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -52,11 +52,16 @@ class Search: SearchProtocol {
             delegate?.searchError(messageText: "Search Error", informativeText: error.localizedDescription)
         } else if let data = data {
             do {
-                let jsonObject = try JSONSerialization.jsonObject(with: data) as! [String: AnyObject]
-                handle(jsonObject: jsonObject)
+                if let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] {
+                    handle(jsonObject: jsonObject)
+                } else {
+                    delegate?.searchError(messageText: "Search Error", informativeText: "JSON decoding of search result failed")
+                }
             } catch {
-                delegate?.searchError(messageText: "Search Error", informativeText: "JSON decoding failed: \(error.localizedDescription)")
+                delegate?.searchError(messageText: "Search Error", informativeText: "JSON decoding of search result failed: \(error.localizedDescription)")
             }
+        } else {
+            delegate?.searchError(messageText: "Search Error", informativeText: "No data received.")
         }
     }
     
@@ -75,10 +80,10 @@ class Search: SearchProtocol {
                 delegate?.resetSearchResults(statusText: "No search results")
             } else {
                 for (key, value) in json {
-                    if key == "items" {
-                        if let jsonSearchResultsArray = value as? NSArray {
-                            jsonSearchResults = jsonSearchResultsArray
-                        }
+                    if key == "items",
+                        let jsonSearchResultsArray = value as? NSArray
+                    {
+                        jsonSearchResults = jsonSearchResultsArray
                     }
                 }
             }
@@ -93,23 +98,20 @@ class Search: SearchProtocol {
         var searchResults: [SearchResult] = []
         
         for itemArrayElement in jsonSearchResultItemsArray {
-            if let item = itemArrayElement as? [String: AnyObject] {
-                if let name = item["name"] as? String {
-                    let suffix = name.substring(from: name.index(name.endIndex, offsetBy: -3))
-                    if suffix == ".rb" {
-                        let nameWithoutSuffix = name.substring(to: name.index(name.endIndex, offsetBy: -3))
-                        
-                        if let urlString = item["url"] as? String {
-                            if let url = URL(string: urlString) {
-                                let searchResult = SearchResult(name: nameWithoutSuffix, url: url)
-                                searchResults.append(searchResult)
-                            }
-                        }
-                    }
+            if let item = itemArrayElement as? [String: AnyObject],
+                let name = item["name"] as? String
+            {
+                let index = name.index(name.endIndex, offsetBy: -3)
+                if name[index...] == ".rb",
+                    let urlString = item["url"] as? String,
+                    let url = URL(string: urlString)
+                {
+                    let searchResult = SearchResult(name: String(name[..<index]), url: url)
+                    searchResults.append(searchResult)
                 }
             }
         }
-        
+
         return searchResults
     }
     
