@@ -1,7 +1,7 @@
 # App Downloader
 
 
-Search for macOS® apps in the [homebrew cask](https://caskroom.github.io)
+Search for macOS® apps in the [homebrew cask](https://formulae.brew.sh/cask)
 catalog.
 
 ![Screencast](https://github.com/yep/app-downloader/raw/master/app-downloader-screencast.gif)
