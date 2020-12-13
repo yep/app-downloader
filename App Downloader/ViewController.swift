@@ -62,6 +62,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     private var searchResults: [SearchResult] = []
     private var searchStartedByButtonPress = false
     private var timer: Timer?
+    private static let font = NSFont.systemFont(ofSize: 13)
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -177,7 +178,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         if tableView.selectedRowIndexes.count == 0 {
             statusTextField.stringValue = ""
         } else if tableView.selectedRowIndexes.count == 1 {
-            self.statusTextField.stringValue = "Getting download URL for \"\(searchResults[tableView.selectedRow].name)\"..."
+            self.statusTextField.stringValue = "Getting information for \"\(searchResults[tableView.selectedRow].name)\"..."
             
             if timer == nil {
                 timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer: Timer) in
@@ -237,10 +238,20 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         showAlert(messageText: messageText, informativeText: informativeText)
     }
     
-    func downloadLocationFound(url: URL) {
-        let font = NSFont.systemFont(ofSize: 13)
-        let text = "Press URL to start download:<br /><a href=\"\(url.absoluteString)\">\(url.absoluteString)</a>"
-        let html = "<span style=\"font-family:'\(font.fontName)'; font-size:\(font.pointSize); color:\(NSColor.labelColorHexString);\">\(text)</span>"
+    func downloadLocationFound(url: URL, name: String?, description: String?, homepage: String?) {
+        var text = ""
+        if let name = name {
+            text += "\(name)<br />"
+        }
+        if let description = description {
+            text += "\(description)<br />"
+        }
+        if let homepage = homepage {
+            text += "<a href=\"\(homepage)\">\(homepage)</a><br />"
+        }
+        text += "<br />Press URL to start download:<br /><a href=\"\(url.absoluteString)\">\(url.absoluteString)</a>"
+        
+        let html = "<span style=\"font-family:'\(Self.font.fontName)'; font-size:\(Self.font.pointSize); color:\(NSColor.labelColorHexString);\">\(text)</span>"
         
         if let data = html.data(using: .utf8),
             let string = NSAttributedString(html: data, options: [NSAttributedString.DocumentReadingOptionKey: Any](), documentAttributes: nil)

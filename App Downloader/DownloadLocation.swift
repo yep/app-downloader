@@ -23,7 +23,7 @@ import Foundation
 
 protocol DownloadLocationDelegate: class {
     func downloadLocationError(messageText: String, informativeText: String)
-    func downloadLocationFound(url: URL)
+    func downloadLocationFound(url: URL, name: String?, description: String?, homepage: String?)
 }
 
 class DownloadLocation: NSObject, URLSessionDelegate, DownloadLocationProtocol {
@@ -72,7 +72,7 @@ class DownloadLocation: NSObject, URLSessionDelegate, DownloadLocationProtocol {
             let task = session?.dataTask(with: url, completionHandler: getCaskFileCompletionHandler)
             task?.resume()
         } else {
-            delegate?.downloadLocationError(messageText: "Error", informativeText: "JSON decoding of download URL failed")
+            delegate?.downloadLocationError(messageText: "Error", informativeText: "JSON decoding of download URL failed. Github search rate limit may be reached. Please try again later.")
         }
     }
     
@@ -82,13 +82,13 @@ class DownloadLocation: NSObject, URLSessionDelegate, DownloadLocationProtocol {
         if let error = errorOptional {
             delegate?.downloadLocationError(messageText: "Download failed", informativeText: error.localizedDescription)
         } else if let data = dataOptional, let caskFile = String(data: data, encoding: .utf8) {
-            let (version, _) = parse(caskFileString: caskFile)
+            let (name, version, _, description, homepage) = parse(caskFileString: caskFile)
             
             if var downloadUrl = extract(searchString: "url", from: caskFile) {
                 downloadUrl = replace(version: version, in: downloadUrl)
                 
                 if let url = URL(string: downloadUrl) {
-                    delegate?.downloadLocationFound(url: url)
+                    delegate?.downloadLocationFound(url: url, name: name, description: description, homepage: homepage)
                 } else {
                     delegate?.downloadLocationError(messageText: "Unknown Download URL", informativeText: "Unknown download URL for version \(version):\n\n\(downloadUrl)")
                 }
@@ -100,8 +100,8 @@ class DownloadLocation: NSObject, URLSessionDelegate, DownloadLocationProtocol {
 
     // MARK: - private
 
-    fileprivate func parse(caskFileString: String) -> (String, String) {
-        var version = "", sha256 = ""
+    fileprivate func parse(caskFileString: String) -> (String, String, String, String?, String?) {
+        var name = "", version = "", sha256 = "", description: String?, homepage: String?
         let caskFileLines = caskFileString.components(separatedBy: .newlines)
         
         for line in caskFileLines {
@@ -111,39 +111,53 @@ class DownloadLocation: NSObject, URLSessionDelegate, DownloadLocationProtocol {
             if let extractedString = extract(searchString: "sha256 \"", from: line) {
                 sha256 = extractedString // currently unused
             }
+            if let extractedString = extract(searchString: "name", from: line, allowSpace: true) {
+                name = extractedString
+            }
+            if let extractedString = extract(searchString: "desc", from: line, allowSpace: true) {
+                description = extractedString
+            }
+            if let extractedString = extract(searchString: "homepage", from: line, allowSpace: true) {
+                homepage = extractedString
+            }
         }
         
         #if DEBUG
-        print("version: \(version)\nsha256: \(sha256)\n")
+        print("name: \(name)\ndescription: \(description ?? "-")\nhomepage: \(homepage ?? "-")\nversion: \(version)\nsha256: \(sha256)\n")
         #endif
 
-        return (version, sha256)
+        return (name, version, sha256, description, homepage)
     }
     
-    fileprivate func replace(version: String, in source: String) -> String {
-        let (major, minor, patch, patchOnly, beforeComma, afterComma, afterCommaBeforeColon, afterColon) = split(version: version)
+    fileprivate func extract(searchString: String, from sourceString: String, allowSpace: Bool = false) -> String? {
+        if var textLine = extractTextLine(containingString: searchString, in: sourceString) {
+            if allowSpace {
+                textLine = textLine.replacingOccurrences(of: searchString, with: "")
+                return trim(textLine)
+            } else {
+                textLine = textLine.replacingOccurrences(of: ", '", with: ",'")
+                let textArray = textLine.split(separator: " ").map(String.init)
+                if textArray.count == 2 {
+                    return trim(textArray[1])
+                }
+            }
+        }
         
-        var result = source.replacingOccurrences(of: "#{version}", with: version)
-        result = result.replacingOccurrences(of: "#{version.major}", with: major)
-        result = result.replacingOccurrences(of: "#{version.minor}", with: minor)
-        result = result.replacingOccurrences(of: "#{version.major_minor}", with: "\(major).\(minor)")
-        result = result.replacingOccurrences(of: "#{version.major_minor.no_dots}", with: "\(major)\(minor)")
-        result = result.replacingOccurrences(of: "#{version.major_minor_patch}", with: "\(major).\(minor).\(patchOnly)")
-        result = result.replacingOccurrences(of: "#{version.major_minor}", with: major)
-        result = result.replacingOccurrences(of: "#{version.dots_to_underscores}", with: "\(major)_\(minor)_\(patch)")
-        result = result.replacingOccurrences(of: "#{version.no_dots}", with: "\(major)\(minor)\(patch)")
-        result = result.replacingOccurrences(of: "#{version.patch}", with: patch)
-        result = result.replacingOccurrences(of: "#{version.dots_to_hyphens}", with: "\(major)-\(minor)-\(patch)")
-        result = result.replacingOccurrences(of: "#{version.before_comma}", with: "\(beforeComma)")
-        result = result.replacingOccurrences(of: "#{version.after_comma}", with: "\(afterComma)")
-        result = result.replacingOccurrences(of: "#{version.after_comma.before_colon}", with: "\(afterCommaBeforeColon)")
-        result = result.replacingOccurrences(of: "#{version.after_colon}", with: "\(afterColon)")
-        result = result.replacingOccurrences(of: "#{language}", with: "en-US") // thunderbird
-        result = result.replacingOccurrences(of: "#{version.sub(%r{-.*},'')}", with: "\(major).\(minor).\(patchOnly)") // virtualbox
-
-        return result
+        return nil
     }
     
+    fileprivate func extractTextLine(containingString searchString: String, in sourceString: String) -> String? {
+        if let searchRange = sourceString.range(of: searchString) {
+            return String(sourceString[sourceString.lineRange(for: searchRange)])
+        }
+        
+        return nil
+    }
+    
+    fileprivate func trim(_ source: String) -> String {
+        return source.trimmingCharacters(in: CharacterSet(charactersIn: " ,\"'\n"))
+    }
+
     private func split(version: String) -> (String, String, String, String, String, String, String, String) {
         var versionMajor = "", versionMinor = "", versionPatch = "", versionPatchOnly = "", beforeComma = "", afterComma = "", afterCommaBeforeColon = "", afterColon = ""
 
@@ -182,28 +196,28 @@ class DownloadLocation: NSObject, URLSessionDelegate, DownloadLocationProtocol {
 
         return (versionMajor, versionMinor, versionPatch, versionPatchOnly, beforeComma, afterComma, afterCommaBeforeColon, afterColon)
     }
-    
-    fileprivate func extract(searchString: String, from sourceString: String) -> String? {
-        if var textLine = extractTextLine(containingString: searchString, in: sourceString) {
-            textLine = textLine.replacingOccurrences(of: ", '", with: ",'")
-            let textArray = textLine.split(separator: " ").map(String.init)
-            if textArray.count == 2 {
-                return trim(textArray[1])
-            }
-        }
+
+    fileprivate func replace(version: String, in source: String) -> String {
+        let (major, minor, patch, patchOnly, beforeComma, afterComma, afterCommaBeforeColon, afterColon) = split(version: version)
         
-        return nil
-    }
-    
-    fileprivate func trim(_ source: String) -> String {
-        return source.trimmingCharacters(in: CharacterSet(charactersIn: ",\"'\n"))
-    }
-    
-    fileprivate func extractTextLine(containingString searchString: String, in sourceString: String) -> String? {
-        if let searchRange = sourceString.range(of: searchString) {
-            return String(sourceString[sourceString.lineRange(for: searchRange)])
-        }
-        
-        return nil
+        var result = source.replacingOccurrences(of: "#{version}", with: version)
+        result = result.replacingOccurrences(of: "#{version.major}", with: major)
+        result = result.replacingOccurrences(of: "#{version.minor}", with: minor)
+        result = result.replacingOccurrences(of: "#{version.major_minor}", with: "\(major).\(minor)")
+        result = result.replacingOccurrences(of: "#{version.major_minor.no_dots}", with: "\(major)\(minor)")
+        result = result.replacingOccurrences(of: "#{version.major_minor_patch}", with: "\(major).\(minor).\(patchOnly)")
+        result = result.replacingOccurrences(of: "#{version.major_minor}", with: major)
+        result = result.replacingOccurrences(of: "#{version.dots_to_underscores}", with: "\(major)_\(minor)_\(patch)")
+        result = result.replacingOccurrences(of: "#{version.no_dots}", with: "\(major)\(minor)\(patch)")
+        result = result.replacingOccurrences(of: "#{version.patch}", with: patch)
+        result = result.replacingOccurrences(of: "#{version.dots_to_hyphens}", with: "\(major)-\(minor)-\(patch)")
+        result = result.replacingOccurrences(of: "#{version.before_comma}", with: "\(beforeComma)")
+        result = result.replacingOccurrences(of: "#{version.after_comma}", with: "\(afterComma)")
+        result = result.replacingOccurrences(of: "#{version.after_comma.before_colon}", with: "\(afterCommaBeforeColon)")
+        result = result.replacingOccurrences(of: "#{version.after_colon}", with: "\(afterColon)")
+        result = result.replacingOccurrences(of: "#{language}", with: "en-US") // thunderbird
+        result = result.replacingOccurrences(of: "#{version.sub(%r{-.*},'')}", with: "\(major).\(minor).\(patchOnly)") // virtualbox
+
+        return result
     }
 }

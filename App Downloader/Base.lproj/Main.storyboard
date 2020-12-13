@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -390,12 +390,15 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="App_Downloader" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="452" height="353"/>
+                    <view key="view" wantsLayer="YES" misplaced="YES" id="m2S-Jp-Qdl">
+                        <rect key="frame" x="0.0" y="0.0" width="481" height="365"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFQ-1B-nfE">
-                                <rect key="frame" x="20" y="311" width="333" height="22"/>
+                                <rect key="frame" x="20" y="323" width="362" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="zYa-GB-atM"/>
+                                </constraints>
                                 <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Enter App Name Here" usesSingleLineMode="YES" bezelStyle="round" id="IVA-kI-bQk">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -403,21 +406,20 @@
                                 </searchFieldCell>
                             </searchField>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Puj-8h-07T">
-                                <rect key="frame" x="20" y="78" width="412" height="225"/>
+                                <rect key="frame" x="20" y="172" width="441" height="143"/>
                                 <clipView key="contentView" id="y71-eb-JbM">
-                                    <rect key="frame" x="1" y="1" width="410" height="223"/>
+                                    <rect key="frame" x="1" y="1" width="439" height="141"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="U7J-i3-wJf">
-                                            <rect key="frame" x="0.0" y="0.0" width="410" height="223"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="439" height="141"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="407" minWidth="40" maxWidth="1000" id="s76-25-2kA">
+                                                <tableColumn width="369" minWidth="40" maxWidth="1000" id="s76-25-2kA">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -429,11 +431,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="searchResultCellIdentifier" id="she-mG-WTW">
-                                                            <rect key="frame" x="1" y="1" width="407" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="378" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="YHJ-Fq-WpY">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="407" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="1" width="378" height="16"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="z7c-Dy-7UI">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -456,19 +458,19 @@
                                         </tableView>
                                     </subviews>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="nUL-Oj-rqZ">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="nUL-Oj-rqZ">
                                     <rect key="frame" x="1" y="208" width="325" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="c1S-kT-qVb">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="c1S-kT-qVb">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ox-s7-6aS">
-                                <rect key="frame" x="18" y="20" width="416" height="53"/>
+                                <rect key="frame" x="18" y="20" width="445" height="143"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="53" id="AWn-Lx-rCG"/>
+                                    <constraint firstAttribute="height" constant="143" id="6be-yP-5Fn"/>
                                 </constraints>
                                 <textFieldCell key="cell" truncatesLastVisibleLine="YES" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" title="status" allowsEditingTextAttributes="YES" id="Psi-Ij-QoS">
                                     <font key="font" metaFont="system"/>
@@ -477,9 +479,10 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gis-JP-RxX">
-                                <rect key="frame" x="355" y="304" width="83" height="32"/>
+                                <rect key="frame" x="383" y="318" width="85" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="71" id="g6G-Fr-8Lh"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="71" id="S44-QM-zka"/>
+                                    <constraint firstAttribute="height" constant="20" id="nYj-NS-u8W"/>
                                 </constraints>
                                 <buttonCell key="cell" type="push" title="Search" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2YZ-Hd-BvX">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -494,19 +497,18 @@ DQ
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Puj-8h-07T" secondAttribute="trailing" constant="20" id="1XH-dI-7PD"/>
-                            <constraint firstItem="Puj-8h-07T" firstAttribute="top" secondItem="gis-JP-RxX" secondAttribute="bottom" constant="8" id="5qy-c1-ct4"/>
-                            <constraint firstItem="5ox-s7-6aS" firstAttribute="top" secondItem="Puj-8h-07T" secondAttribute="bottom" constant="5" id="8Y9-jm-sZh"/>
-                            <constraint firstAttribute="trailing" secondItem="5ox-s7-6aS" secondAttribute="trailing" constant="20" id="Azn-Tm-7fz"/>
-                            <constraint firstAttribute="bottom" secondItem="5ox-s7-6aS" secondAttribute="bottom" constant="20" id="B1C-PM-IdL"/>
-                            <constraint firstItem="MFQ-1B-nfE" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="Rvq-sB-nS0"/>
-                            <constraint firstItem="U7J-i3-wJf" firstAttribute="top" secondItem="MFQ-1B-nfE" secondAttribute="bottom" constant="9" id="VC8-eQ-UTy"/>
-                            <constraint firstAttribute="trailing" secondItem="gis-JP-RxX" secondAttribute="trailing" constant="20" id="VeX-3y-GMc"/>
-                            <constraint firstItem="gis-JP-RxX" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="21" id="e7y-mm-p76"/>
-                            <constraint firstItem="MFQ-1B-nfE" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="i0F-3A-FPT"/>
-                            <constraint firstItem="Puj-8h-07T" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="jBS-9g-v8D"/>
-                            <constraint firstItem="gis-JP-RxX" firstAttribute="leading" secondItem="MFQ-1B-nfE" secondAttribute="trailing" constant="8" id="lzb-gf-JnO"/>
-                            <constraint firstItem="5ox-s7-6aS" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="mhh-wb-pRG"/>
+                            <constraint firstItem="MFQ-1B-nfE" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="1eS-Cy-LzC"/>
+                            <constraint firstItem="Puj-8h-07T" firstAttribute="top" secondItem="MFQ-1B-nfE" secondAttribute="bottom" constant="8" id="1g6-8e-Ihb"/>
+                            <constraint firstAttribute="trailing" secondItem="gis-JP-RxX" secondAttribute="trailing" constant="20" symbolic="YES" id="NlZ-Wr-tVX"/>
+                            <constraint firstAttribute="bottom" secondItem="5ox-s7-6aS" secondAttribute="bottom" constant="20" symbolic="YES" id="RhE-du-v9F"/>
+                            <constraint firstItem="gis-JP-RxX" firstAttribute="top" secondItem="MFQ-1B-nfE" secondAttribute="top" id="ZjC-TC-hEt"/>
+                            <constraint firstItem="5ox-s7-6aS" firstAttribute="leading" secondItem="MFQ-1B-nfE" secondAttribute="leading" id="bTR-Tb-xeC"/>
+                            <constraint firstItem="MFQ-1B-nfE" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="eFr-yq-YZq"/>
+                            <constraint firstItem="gis-JP-RxX" firstAttribute="leading" secondItem="MFQ-1B-nfE" secondAttribute="trailing" constant="8" symbolic="YES" id="hGi-xf-4h3"/>
+                            <constraint firstItem="Puj-8h-07T" firstAttribute="leading" secondItem="MFQ-1B-nfE" secondAttribute="leading" id="kic-0G-6gH"/>
+                            <constraint firstItem="gis-JP-RxX" firstAttribute="trailing" secondItem="Puj-8h-07T" secondAttribute="trailing" id="pJX-Xb-UlI"/>
+                            <constraint firstItem="5ox-s7-6aS" firstAttribute="top" secondItem="Puj-8h-07T" secondAttribute="bottom" constant="9" id="q3T-vg-6uI"/>
+                            <constraint firstItem="5ox-s7-6aS" firstAttribute="trailing" secondItem="Puj-8h-07T" secondAttribute="trailing" id="tac-gi-435"/>
                         </constraints>
                     </view>
                     <connections>
@@ -518,7 +520,7 @@ DQ
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="555" y="245"/>
+            <point key="canvasLocation" x="575.5" y="240.5"/>
         </scene>
     </scenes>
 </document>
