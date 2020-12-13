@@ -49,7 +49,7 @@ extension NSColor {
     }
 }
 
-class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSSearchFieldDelegate, SearchDelegate, DownloadLocationDelegate {
+class ViewController: NSViewController, NSTableViewDelegate {
     @IBOutlet weak var searchField: NSSearchField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var statusTextField: NSTextField!
@@ -141,15 +141,19 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             button.isEnabled = true
         }
     }
-    
-    // MARK: - NSSearchFieldDelegate
-    
+}
+
+// MARK: - NSSearchFieldDelegate
+
+extension ViewController: NSSearchFieldDelegate {
     func controlTextDidChange(_ obj: Notification) {
         textFieldChanged()
     }
-    
-    // MARK: - NSControlTextEditingDelegate
-    
+}
+
+// MARK: - NSControlTextEditingDelegate
+
+extension ViewController: NSControlTextEditingDelegate {
     func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
         tableView.deselectAll(nil)
         return true
@@ -158,9 +162,11 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
         return true
     }
-    
-    // MARK: - NSTableViewDataSource
-    
+}
+
+// MARK: - NSTableViewDataSource
+
+extension ViewController: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         return searchResults.count
     }
@@ -194,9 +200,11 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             }
         }
     }
-    
-    // MARK: - SearchDelegate
-    
+}
+
+// MARK: - SearchDelegate
+
+extension ViewController: SearchDelegate {
     func searchError(messageText: String, informativeText: String) {
         showAlert(messageText: messageText, informativeText: informativeText)
     }
@@ -231,9 +239,12 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             }
         }
     }
+}
+
+// MARK: - DownloadLocationDelegate
     
-    // MARK: - DownloadDelegate
-    
+extension ViewController: DownloadLocationDelegate
+{
     func downloadLocationError(messageText: String, informativeText: String) {
         showAlert(messageText: messageText, informativeText: informativeText)
     }
@@ -253,8 +264,11 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         
         let html = "<span style=\"font-family:'\(Self.font.fontName)'; font-size:\(Self.font.pointSize); color:\(NSColor.labelColorHexString);\">\(text)</span>"
         
+        
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [.documentType:      NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue]
+        
         if let data = html.data(using: .utf8),
-            let string = NSAttributedString(html: data, options: [NSAttributedString.DocumentReadingOptionKey: Any](), documentAttributes: nil)
+            let string = NSAttributedString(html: data, options: options, documentAttributes: nil)
         {
             statusTextField.attributedStringValue = string
         }
