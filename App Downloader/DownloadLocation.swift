@@ -105,11 +105,11 @@ class DownloadLocation: NSObject, URLSessionDelegate, DownloadLocationProtocol {
         let caskFileLines = caskFileString.components(separatedBy: .newlines)
         
         for line in caskFileLines {
-            if let temp = extract(searchString: "version '", from: line) {
-                version = temp
+            if let extractedString = extract(searchString: "version \"", from: line) {
+                version = extractedString
             }
-            if let temp = extract(searchString: "sha256 '", from: line) {
-                sha256 = temp // currently unused
+            if let extractedString = extract(searchString: "sha256 \"", from: line) {
+                sha256 = extractedString // currently unused
             }
         }
         
