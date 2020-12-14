@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.3</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
@@ -28,5 +28,15 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/yep/app-downloader/master/app-downloader-auto-update.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>6eN2hacb7ZrdZFIPj0UFUC+zM04rNUryN3enlNCbj3k=</string>
+	<key>SUScheduledCheckInterval</key>
+	<string>86400</string>
+	<key>SUShowReleaseNotes</key>
+	<false/>
 </dict>
 </plist>

@@ -1,11 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Preferences-->
+        <scene sceneID="i9H-h2-cNQ">
+            <objects>
+                <userDefaultsController representsSharedInstance="YES" id="ahf-QR-eD8"/>
+                <customObject id="hJc-w3-7ow" customClass="SUUpdater"/>
+                <customObject id="onI-8O-Erk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <viewController title="Preferences" id="FsJ-WC-Tv9" sceneMemberID="viewController">
+                    <view key="view" id="hYe-ks-dVj">
+                        <rect key="frame" x="0.0" y="0.0" width="259" height="121"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BBh-0k-1ef">
+                                <rect key="frame" x="18" y="84" width="221" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Automatically check for updates" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="CFA-U6-Vcg">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="hJc-w3-7ow" name="value" keyPath="automaticallyChecksForUpdates" id="KAH-TM-CQt"/>
+                                </connections>
+                            </button>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X7t-uS-LCQ">
+                                <rect key="frame" x="131" y="49" width="112" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" title="Hourly" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="3600" imageScaling="proportionallyDown" inset="2" selectedItem="SRI-sX-7h8" id="e1N-lv-eQk">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="Tpa-WN-K3q">
+                                        <items>
+                                            <menuItem title="Hourly" state="on" tag="3600" id="SRI-sX-7h8"/>
+                                            <menuItem title="Daily" tag="86400" id="jD6-Ag-AtA"/>
+                                            <menuItem title="Weekly" tag="604800" id="DH2-UZ-FqK"/>
+                                            <menuItem title="Monthly" tag="2629800" id="nJ6-eG-Wn9"/>
+                                        </items>
+                                    </menu>
+                                    <connections>
+                                        <binding destination="hJc-w3-7ow" name="selectedTag" keyPath="updateCheckInterval" id="5nc-7c-mEd"/>
+                                    </connections>
+                                </popUpButtonCell>
+                                <connections>
+                                    <binding destination="hJc-w3-7ow" name="enabled" keyPath="automaticallyChecksForUpdates" id="z8c-Ij-NKQ"/>
+                                    <binding destination="hJc-w3-7ow" name="selectedTag" keyPath="updateCheckInterval" id="rth-x6-vhf"/>
+                                </connections>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fZw-qX-jrh">
+                                <rect key="frame" x="18" y="55" width="97" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Update Interval" id="Psh-NW-o8q">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtV-fi-3Na">
+                                <rect key="frame" x="13" y="13" width="233" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Check for Updates" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iyw-pc-G3O">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="checkForUpdates:" target="hJc-w3-7ow" id="mHI-dm-dVa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="384.5" y="824.5"/>
+        </scene>
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
             <objects>
@@ -22,8 +93,17 @@
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem isSeparatorItem="YES" id="ewy-Hn-BTi"/>
+                                        <menuItem title="Check for Updates…" keyEquivalent="u" id="hXM-ww-DE0">
+                                            <connections>
+                                                <action selector="checkForUpdates:" target="cPM-q9-jCW" id="sln-i1-g9w"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <segue destination="FsJ-WC-Tv9" kind="show" id="8HZ-ZD-Kz3"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -361,8 +441,9 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="App_Downloader" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="cPM-q9-jCW" customClass="SUUpdater"/>
             </objects>
-            <point key="canvasLocation" x="63" y="-77"/>
+            <point key="canvasLocation" x="78" y="565"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -391,28 +472,17 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="App_Downloader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" misplaced="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="481" height="365"/>
+                        <rect key="frame" x="0.0" y="0.0" width="481" height="499"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFQ-1B-nfE">
-                                <rect key="frame" x="20" y="323" width="362" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="zYa-GB-atM"/>
-                                </constraints>
-                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Enter App Name Here" usesSingleLineMode="YES" bezelStyle="round" id="IVA-kI-bQk">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </searchFieldCell>
-                            </searchField>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Puj-8h-07T">
-                                <rect key="frame" x="20" y="172" width="441" height="143"/>
+                                <rect key="frame" x="20" y="172" width="441" height="271"/>
                                 <clipView key="contentView" id="y71-eb-JbM">
-                                    <rect key="frame" x="1" y="1" width="439" height="141"/>
+                                    <rect key="frame" x="1" y="1" width="439" height="269"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="U7J-i3-wJf">
-                                            <rect key="frame" x="0.0" y="0.0" width="439" height="141"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="439" height="269"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -458,6 +528,9 @@
                                         </tableView>
                                     </subviews>
                                 </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="135" id="7um-3C-Wqn"/>
+                                </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="nUL-Oj-rqZ">
                                     <rect key="frame" x="1" y="208" width="325" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -478,8 +551,19 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFQ-1B-nfE">
+                                <rect key="frame" x="20" y="451" width="362" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="zYa-GB-atM"/>
+                                </constraints>
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Enter App Name Here" usesSingleLineMode="YES" bezelStyle="round" id="IVA-kI-bQk">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </searchFieldCell>
+                            </searchField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gis-JP-RxX">
-                                <rect key="frame" x="383" y="318" width="85" height="32"/>
+                                <rect key="frame" x="383" y="446" width="85" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="71" id="S44-QM-zka"/>
                                     <constraint firstAttribute="height" constant="20" id="nYj-NS-u8W"/>
@@ -520,7 +604,7 @@ DQ
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="575.5" y="240.5"/>
+            <point key="canvasLocation" x="590.5" y="211"/>
         </scene>
     </scenes>
 </document>

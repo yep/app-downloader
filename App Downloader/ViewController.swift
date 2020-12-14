@@ -264,8 +264,7 @@ extension ViewController: DownloadLocationDelegate
         
         let html = "<span style=\"font-family:'\(Self.font.fontName)'; font-size:\(Self.font.pointSize); color:\(NSColor.labelColorHexString);\">\(text)</span>"
         
-        
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [.documentType:      NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue]
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue]
         
         if let data = html.data(using: .utf8),
             let string = NSAttributedString(html: data, options: options, documentAttributes: nil)
