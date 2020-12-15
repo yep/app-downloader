@@ -1,37 +1,43 @@
-## Welcome to GitHub Pages
+# App Downloader
 
-You can use the [editor on GitHub](https://github.com/yep/app-downloader/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Search for macOS® apps in the [homebrew cask](https://formulae.brew.sh/cask)
+catalog.
 
-### Markdown
+![Screencast](https://github.com/yep/app-downloader/raw/master/app-downloader-screencast.gif)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+For each search result, the publisher's original download location is shown.
+Press on the download URL to start downloading using your web browser.
 
-```markdown
-Syntax highlighted code block
+Implemented using the [Github API](https://developer.github.com) to search the
+[homebrew-cask repository](https://github.com/caskroom/homebrew-cask).
 
-# Header 1
-## Header 2
-### Header 3
+Download locations are maintained by thousands of [homebrew-cask contributors](https://github.com/caskroom/homebrew-cask/graphs/contributors).
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+## Download
 
-**Bold** and _Italic_ and `Code` text
+Get the latest version from the [release page](https://github.com/yep/app-downloader/releases).
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## License
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/yep/app-downloader/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+    Copyright (C) 2017-2020 Jahn Bertsch
+  
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+  
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+  
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http:www.gnu.org/licenses/>.
+    Also add information on how to contact you by electronic and paper mail.
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+macOS is a trademark of Apple Inc., registered in the U.S. and other countries. 
