@@ -93,12 +93,12 @@
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="ewy-Hn-BTi"/>
                                         <menuItem title="Check for Updates…" keyEquivalent="u" id="hXM-ww-DE0">
                                             <connections>
                                                 <action selector="checkForUpdates:" target="cPM-q9-jCW" id="sln-i1-g9w"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="ewy-Hn-BTi"/>
                                         <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
                                             <connections>
                                                 <segue destination="FsJ-WC-Tv9" kind="show" id="8HZ-ZD-Kz3"/>
@@ -476,13 +476,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Puj-8h-07T">
-                                <rect key="frame" x="20" y="172" width="441" height="271"/>
+                                <rect key="frame" x="20" y="172" width="441" height="269"/>
                                 <clipView key="contentView" id="y71-eb-JbM">
-                                    <rect key="frame" x="1" y="1" width="439" height="269"/>
+                                    <rect key="frame" x="1" y="1" width="439" height="267"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="U7J-i3-wJf">
-                                            <rect key="frame" x="0.0" y="0.0" width="439" height="269"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="439" height="267"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -552,7 +552,7 @@
                                 </textFieldCell>
                             </textField>
                             <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFQ-1B-nfE">
-                                <rect key="frame" x="20" y="451" width="362" height="22"/>
+                                <rect key="frame" x="20" y="449" width="362" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="zYa-GB-atM"/>
                                 </constraints>
@@ -563,7 +563,7 @@
                                 </searchFieldCell>
                             </searchField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gis-JP-RxX">
-                                <rect key="frame" x="383" y="446" width="85" height="32"/>
+                                <rect key="frame" x="383" y="444" width="85" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="71" id="S44-QM-zka"/>
                                     <constraint firstAttribute="height" constant="20" id="nYj-NS-u8W"/>

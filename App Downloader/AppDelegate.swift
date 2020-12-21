@@ -20,9 +20,14 @@
 //
 
 import Cocoa
+import LetsMove
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        PFMoveToApplicationsFolderIfNecessary()
+    }
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
     }

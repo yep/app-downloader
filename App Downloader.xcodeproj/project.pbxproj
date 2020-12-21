@@ -16,6 +16,8 @@
 		0DB50FA61E7BEB9C00403196 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0DB50FA51E7BEB9C00403196 /* LICENSE */; };
 		1397261E2587E8D000551302 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 139725F82587E8BD00551302 /* Sparkle.framework */; };
 		1397261F2587E8D000551302 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 139725F82587E8BD00551302 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		13B9526C259124DD00FF5457 /* LetsMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13B95269259123A500FF5457 /* LetsMove.framework */; };
+		13B9526D259124DD00FF5457 /* LetsMove.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 13B95269259123A500FF5457 /* LetsMove.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,20 @@
 			remoteGlobalIDString = EA4311A0229D5FBC00A5503D;
 			remoteInfo = ed25519;
 		};
+		13B95266259123A500FF5457 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13B95261259123A500FF5457 /* LetsMove.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D1107320486CEB800E47090;
+			remoteInfo = "LetsMove Test";
+		};
+		13B95268259123A500FF5457 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13B95261259123A500FF5457 /* LetsMove.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F146F8271CE7094400233A9B;
+			remoteInfo = LetsMove;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -113,6 +129,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1397261F2587E8D000551302 /* Sparkle.framework in Embed Frameworks */,
+				13B9526D259124DD00FF5457 /* LetsMove.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +150,7 @@
 		0DB50FA71E7BECD000403196 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		136555532589483F00EC669C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		139725E42587E8BD00551302 /* Sparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sparkle.xcodeproj; path = "sparkle-framework/Sparkle.xcodeproj"; sourceTree = "<group>"; };
+		13B95261259123A500FF5457 /* LetsMove.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LetsMove.xcodeproj; path = "lets-move-framework/LetsMove.xcodeproj"; sourceTree = "<group>"; };
 		13D6F7312589EB97007DC4D0 /* app-downloader-auto-update.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "app-downloader-auto-update.xml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1397261E2587E8D000551302 /* Sparkle.framework in Frameworks */,
+				13B9526C259124DD00FF5457 /* LetsMove.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +175,7 @@
 				13D6F7312589EB97007DC4D0 /* app-downloader-auto-update.xml */,
 				0D4503721E2431CC00F5F4FE /* App Downloader */,
 				139725E42587E8BD00551302 /* Sparkle.xcodeproj */,
+				13B95261259123A500FF5457 /* LetsMove.xcodeproj */,
 				0D4503711E2431CC00F5F4FE /* Products */,
 				1397261D2587E8D000551302 /* Frameworks */,
 			);
@@ -209,6 +229,15 @@
 				136555532589483F00EC669C /* Security.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		13B95262259123A500FF5457 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13B95267259123A500FF5457 /* LetsMove Test.app */,
+				13B95269259123A500FF5457 /* LetsMove.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +297,10 @@
 			productRefGroup = 0D4503711E2431CC00F5F4FE /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 13B95262259123A500FF5457 /* Products */;
+					ProjectRef = 13B95261259123A500FF5457 /* LetsMove.xcodeproj */;
+				},
 				{
 					ProductGroup = 139725E52587E8BD00551302 /* Products */;
 					ProjectRef = 139725E42587E8BD00551302 /* Sparkle.xcodeproj */;
@@ -363,6 +396,20 @@
 			fileType = archive.ar;
 			path = libed25519.a;
 			remoteRef = 1397260D2587E8BD00551302 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		13B95267259123A500FF5457 /* LetsMove Test.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "LetsMove Test.app";
+			remoteRef = 13B95266259123A500FF5457 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		13B95269259123A500FF5457 /* LetsMove.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LetsMove.framework;
+			remoteRef = 13B95268259123A500FF5457 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -523,12 +570,12 @@
 				CODE_SIGN_ENTITLEMENTS = "App Downloader/App Downloader.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "App Downloader/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.yep.App-Downloader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -542,12 +589,12 @@
 				CODE_SIGN_ENTITLEMENTS = "App Downloader/App Downloader.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "App Downloader/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.yep.App-Downloader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

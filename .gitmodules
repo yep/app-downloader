@@ -1,3 +1,6 @@
 [submodule "sparkle-framework"]
 	path = sparkle-framework
 	url = https://github.com/sparkle-project/Sparkle.git
+[submodule "lets-move-framework"]
+	path = lets-move-framework
+	url = https://github.com/potionfactory/LetsMove.git

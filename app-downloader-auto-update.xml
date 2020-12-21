@@ -3,25 +3,14 @@
     <channel>
         <title>App Downloader</title>
         <item>
-            <title>Version 1.0.2</title>
-            <pubDate>Mi, 16 Dez 2020 08:10:07 +0100</pubDate>
+            <title>Version 1.0.4</title>
+            <pubDate>Mo, 21 Dez 2020 20:52:51 +0100</pubDate>
             <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
             <enclosure
-            url="https://github.com/yep/app-downloader/releases/download/v1.0.2/AppDownloader-v1.0.2.zip"
-            sparkle:version="4"
-            sparkle:shortVersionString="1.0.2"
-            sparkle:edSignature="HDgoTl1TSBm8X7kCjtyd/JF1d8L/r1AMkDxhvrndn3/9Lj9hd1Qm30yxh6M2TMniBVDXEQgd9nHst+qpfDdjCA==" length="4297317"
-            type="application/octet-stream"/>
-        </item>
-        <item>
-            <title>Version 1.0.3</title>
-            <pubDate>Mi, 16 Dez 2020 08:12:03 +0100</pubDate>
-            <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
-            <enclosure
-            url="https://github.com/yep/app-downloader/releases/download/v1.0.3/AppDownloader-v1.0.3.zip"
-            sparkle:version="5"
-            sparkle:shortVersionString="1.0.3"
-            sparkle:edSignature="IoFmX03qLd4qPrBTGHH7yYJd3Dahjibz+xoSV/zWvHOnfoyJTuaFM7Pof3cAj+RV5sm7akmiD97EYlznUwdiAQ==" length="6569414"
+            url="https://github.com/yep/app-downloader/releases/download/v1.0.4/AppDownloader-v1.0.4.zip"
+            sparkle:version="6"
+            sparkle:shortVersionString="1.0.4"
+            sparkle:edSignature="8F5PC05MYiM7iLfQlAKlCHxgcQKlVy/0haDGLS7/7zXq184/cTMw0yPl0hn1JP24QFrJPhrcdni35Olzqx8JCg==" length="6570343"
             type="application/octet-stream"/>
         </item>
     </channel>
