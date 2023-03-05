@@ -9,9 +9,6 @@ catalog.
 For each search result, the publisher's original download location is shown.
 Press on the download URL to start downloading using your web browser.
 
-Implemented using the [Github API](https://developer.github.com) to search the
-[homebrew-cask repository](https://github.com/caskroom/homebrew-cask).
-
 Download locations are maintained by thousands of [homebrew-cask contributors](https://github.com/caskroom/homebrew-cask/graphs/contributors).
 
 
@@ -20,10 +17,19 @@ Download locations are maintained by thousands of [homebrew-cask contributors](h
 Get the latest version from the [release page](https://github.com/yep/app-downloader/releases).
 
 
+## TODO
+
+ - Fix settings window
+ - Verify SHA256 hash of downloaded file
+ - Search using Cmd-F
+ 
+ If you want to implement one of the above features, please create a pull request.
+ 
+
 ## License
 
 
-    Copyright (C) 2017-2020 Jahn Bertsch
+    Copyright (C) 2017-2023 Jahn Bertsch
   
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

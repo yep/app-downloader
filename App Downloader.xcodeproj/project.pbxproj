@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0149A2A529B404DC008467B1 /* Color+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0149A2A429B404DC008467B1 /* Color+HexString.swift */; };
 		0D4503741E2431CC00F5F4FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503731E2431CC00F5F4FE /* AppDelegate.swift */; };
 		0D4503761E2431CC00F5F4FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503751E2431CC00F5F4FE /* ViewController.swift */; };
 		0D4503781E2431CC00F5F4FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D4503771E2431CC00F5F4FE /* Assets.xcassets */; };
-		0D4503831E24321300F5F4FE /* DownloadLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503821E24321300F5F4FE /* DownloadLocation.swift */; };
 		0D4503851E24323000F5F4FE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503841E24323000F5F4FE /* Search.swift */; };
 		0D4503881E24328700F5F4FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D4503861E24328700F5F4FE /* Main.storyboard */; };
 		0DB50FA61E7BEB9C00403196 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0DB50FA51E7BEB9C00403196 /* LICENSE */; };
@@ -21,6 +21,55 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		01DF4D70299BE88D00D986F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139725E42587E8BD00551302 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 726E07AD1CAF08D6001A286B;
+			remoteInfo = SparkleInstallerLauncher;
+		};
+		01DF4D72299BE88D00D986F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139725E42587E8BD00551302 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 724BB36C1D31D0B7005D534A;
+			remoteInfo = SparkleInstallerConnection;
+		};
+		01DF4D74299BE88D00D986F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139725E42587E8BD00551302 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 724BB3931D333832005D534A;
+			remoteInfo = SparkleInstallerStatus;
+		};
+		01DF4D76299BE88D00D986F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139725E42587E8BD00551302 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 726E07EF1CAF37BD001A286B;
+			remoteInfo = SparkleDownloader;
+		};
+		01DF4D78299BE88D00D986F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139725E42587E8BD00551302 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 726E4A161C86C88F00C57C6A;
+			remoteInfo = TestAppHelper;
+		};
+		01DF4D7A299BE88D00D986F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139725E42587E8BD00551302 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 72D9549E1CBB415B006F28BD;
+			remoteInfo = "sparkle-cli";
+		};
+		01DF4D7C299BE88D00D986F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139725E42587E8BD00551302 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 721C24451CB753E6005440CB;
+			remoteInfo = "Installer Progress";
+		};
 		139725F72587E8BD00551302 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 139725E42587E8BD00551302 /* Sparkle.xcodeproj */;
@@ -62,13 +111,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 726B2B5D1C645FC900388755;
 			remoteInfo = "UI Tests";
-		};
-		139726032587E8BD00551302 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 139725E42587E8BD00551302 /* Sparkle.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 722954B41D04ADAF00ECF9CA;
-			remoteInfo = fileop;
 		};
 		139726052587E8BD00551302 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -137,13 +179,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0D0CEC4B1E4CECEC00AD34FD /* App Downloader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "App Downloader.entitlements"; sourceTree = "<group>"; };
+		0149A2A429B404DC008467B1 /* Color+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HexString.swift"; sourceTree = "<group>"; };
 		0D4503701E2431CC00F5F4FE /* App Downloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Downloader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D4503731E2431CC00F5F4FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D4503751E2431CC00F5F4FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0D4503771E2431CC00F5F4FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D45037C1E2431CC00F5F4FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0D4503821E24321300F5F4FE /* DownloadLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadLocation.swift; sourceTree = "<group>"; };
 		0D4503841E24323000F5F4FE /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		0D4503871E24328700F5F4FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0DB50FA51E7BEB9C00403196 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -192,11 +233,10 @@
 		0D4503721E2431CC00F5F4FE /* App Downloader */ = {
 			isa = PBXGroup;
 			children = (
-				0D0CEC4B1E4CECEC00AD34FD /* App Downloader.entitlements */,
 				0D4503731E2431CC00F5F4FE /* AppDelegate.swift */,
 				0D4503751E2431CC00F5F4FE /* ViewController.swift */,
 				0D4503841E24323000F5F4FE /* Search.swift */,
-				0D4503821E24321300F5F4FE /* DownloadLocation.swift */,
+				0149A2A429B404DC008467B1 /* Color+HexString.swift */,
 				0D4503861E24328700F5F4FE /* Main.storyboard */,
 				0D4503771E2431CC00F5F4FE /* Assets.xcassets */,
 				0D45037C1E2431CC00F5F4FE /* Info.plist */,
@@ -208,12 +248,18 @@
 			isa = PBXGroup;
 			children = (
 				139725F82587E8BD00551302 /* Sparkle.framework */,
+				139726002587E8BD00551302 /* Autoupdate */,
+				01DF4D71299BE88D00D986F9 /* Installer.xpc */,
+				01DF4D73299BE88D00D986F9 /* InstallerConnection.xpc */,
+				01DF4D75299BE88D00D986F9 /* InstallerStatus.xpc */,
+				01DF4D77299BE88D00D986F9 /* Downloader.xpc */,
 				139725FA2587E8BD00551302 /* Sparkle Test App.app */,
+				01DF4D79299BE88D00D986F9 /* TestAppHelper.xpc */,
 				139725FC2587E8BD00551302 /* Sparkle Unit Tests.xctest */,
 				139725FE2587E8BD00551302 /* BinaryDelta */,
-				139726002587E8BD00551302 /* Autoupdate.app */,
+				01DF4D7B299BE88D00D986F9 /* sparkle.app */,
+				01DF4D7D299BE88D00D986F9 /* Updater.app */,
 				139726022587E8BD00551302 /* UI Tests.xctest */,
-				139726042587E8BD00551302 /* fileop */,
 				139726062587E8BD00551302 /* generate_appcast */,
 				139726082587E8BD00551302 /* generate_keys */,
 				1397260A2587E8BD00551302 /* sign_update */,
@@ -268,7 +314,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					0D45036F1E2431CC00F5F4FE = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -314,6 +360,55 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		01DF4D71299BE88D00D986F9 /* Installer.xpc */ = {
+			isa = PBXReferenceProxy;
+			fileType = "wrapper.xpc-service";
+			path = Installer.xpc;
+			remoteRef = 01DF4D70299BE88D00D986F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01DF4D73299BE88D00D986F9 /* InstallerConnection.xpc */ = {
+			isa = PBXReferenceProxy;
+			fileType = "wrapper.xpc-service";
+			path = InstallerConnection.xpc;
+			remoteRef = 01DF4D72299BE88D00D986F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01DF4D75299BE88D00D986F9 /* InstallerStatus.xpc */ = {
+			isa = PBXReferenceProxy;
+			fileType = "wrapper.xpc-service";
+			path = InstallerStatus.xpc;
+			remoteRef = 01DF4D74299BE88D00D986F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01DF4D77299BE88D00D986F9 /* Downloader.xpc */ = {
+			isa = PBXReferenceProxy;
+			fileType = "wrapper.xpc-service";
+			path = Downloader.xpc;
+			remoteRef = 01DF4D76299BE88D00D986F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01DF4D79299BE88D00D986F9 /* TestAppHelper.xpc */ = {
+			isa = PBXReferenceProxy;
+			fileType = "wrapper.xpc-service";
+			path = TestAppHelper.xpc;
+			remoteRef = 01DF4D78299BE88D00D986F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01DF4D7B299BE88D00D986F9 /* sparkle.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = sparkle.app;
+			remoteRef = 01DF4D7A299BE88D00D986F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01DF4D7D299BE88D00D986F9 /* Updater.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Updater.app;
+			remoteRef = 01DF4D7C299BE88D00D986F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		139725F82587E8BD00551302 /* Sparkle.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -342,10 +437,10 @@
 			remoteRef = 139725FD2587E8BD00551302 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		139726002587E8BD00551302 /* Autoupdate.app */ = {
+		139726002587E8BD00551302 /* Autoupdate */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = Autoupdate.app;
+			fileType = "compiled.mach-o.executable";
+			path = Autoupdate;
 			remoteRef = 139725FF2587E8BD00551302 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -354,13 +449,6 @@
 			fileType = wrapper.cfbundle;
 			path = "UI Tests.xctest";
 			remoteRef = 139726012587E8BD00551302 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		139726042587E8BD00551302 /* fileop */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = fileop;
-			remoteRef = 139726032587E8BD00551302 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		139726062587E8BD00551302 /* generate_appcast */ = {
@@ -432,8 +520,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D4503831E24321300F5F4FE /* DownloadLocation.swift in Sources */,
 				0D4503851E24323000F5F4FE /* Search.swift in Sources */,
+				0149A2A529B404DC008467B1 /* Color+HexString.swift in Sources */,
 				0D4503761E2431CC00F5F4FE /* ViewController.swift in Sources */,
 				0D4503741E2431CC00F5F4FE /* AppDelegate.swift in Sources */,
 			);
@@ -486,6 +574,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -545,6 +634,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -567,15 +657,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "App Downloader/App Downloader.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "App Downloader/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 1.0.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.yep.App-Downloader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -586,15 +678,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "App Downloader/App Downloader.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "App Downloader/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 1.0.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.yep.App-Downloader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

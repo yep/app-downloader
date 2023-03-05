@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  AppDownloader
 //
-//  Copyright (C) 2017-2020 Jahn Bertsch
+//  Copyright (C) 2017-2023 Jahn Bertsch
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -21,32 +21,12 @@
 
 import Cocoa
 
-protocol SearchProtocol {
-    func startSearch(searchString: String)
-}
-
-protocol DownloadLocationProtocol {
-    func getDownloadLocation(name: String, url: URL)
-}
-
 struct SearchResult {
     let name: String
+    let description: String
+    let homepage: String
     let url: URL
-}
-
-extension NSColor {
-    static var labelColorHexString: String {
-        get {
-            var hexColor = "#000000"
-            if let color = NSColor.labelColor.usingColorSpace(.deviceRGB) {
-                let red = Int(round(color.redComponent * color.alphaComponent * 0xFF))
-                let green = Int(round(color.greenComponent * color.alphaComponent * 0xFF))
-                let blue = Int(round(color.blueComponent * color.alphaComponent * 0xFF))
-                hexColor = String(format: "#%02X%02X%02X", red, green, blue)
-            }
-            return hexColor
-        }
-    }
+    let sha256: String
 }
 
 class ViewController: NSViewController, NSTableViewDelegate {
@@ -58,16 +38,13 @@ class ViewController: NSViewController, NSTableViewDelegate {
     private let cellIdentifier = "searchResultCellIdentifier"
     private let defaultStatusString = "Enter app name and press \"Search\" button."
     private let search = Search()
-    private let download = DownloadLocation()
     private var searchResults: [SearchResult] = []
     private var searchStartedByButtonPress = false
     private var timer: Timer?
-    private static let font = NSFont.systemFont(ofSize: 13)
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         search.delegate = self
-        download.delegate = self
     }
     
     override func viewDidLoad() {
@@ -78,9 +55,6 @@ class ViewController: NSViewController, NSTableViewDelegate {
         searchField.delegate = self
         statusTextField.allowsEditingTextAttributes = true
         statusTextField.stringValue = defaultStatusString
-   
-        let cacheSize = 50 * 1024 * 1024; // 50 MB
-        URLCache.shared = URLCache(memoryCapacity: cacheSize, diskCapacity: 0, diskPath: nil)
     }
     
     override func viewDidAppear() {
@@ -124,7 +98,7 @@ class ViewController: NSViewController, NSTableViewDelegate {
                     let searchString = self.searchField.stringValue
                     if searchString != "" {
                         self.statusTextField.stringValue = "Searching for \"\(searchString)\"..."
-                        self.search.startSearch(searchString: searchString)
+                        self.search.startSearch(searchString: searchString.lowercased())
                     }
                     self.timer = nil
                 })
@@ -140,6 +114,13 @@ class ViewController: NSViewController, NSTableViewDelegate {
         } else {
             button.isEnabled = true
         }
+    }
+    
+    private func resetSearchResults(statusText: String) {
+        self.searchResults = []
+        self.tableView.reloadData()
+        self.searchStartedByButtonPress = false
+        self.statusTextField.stringValue = statusText
     }
 }
 
@@ -183,22 +164,37 @@ extension ViewController: NSTableViewDataSource {
     func tableViewSelectionDidChange(_ notification: Notification) {
         if tableView.selectedRowIndexes.count == 0 {
             statusTextField.stringValue = ""
-        } else if tableView.selectedRowIndexes.count == 1 {
-            self.statusTextField.stringValue = "Getting information for \"\(searchResults[tableView.selectedRow].name)\"..."
-            
-            if timer == nil {
-                timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer: Timer) in
-                    let selectedRow = self.tableView.selectedRow
-                    if selectedRow != -1 && self.searchResults.count > selectedRow {
-                        let name = self.searchResults[selectedRow].name
-                        let url = self.searchResults[selectedRow].url
-                        self.updateButtonState()
-                        self.download.getDownloadLocation(name: name, url: url)
-                    }
-                    self.timer = nil
-                })
-            }
+        } else if tableView.selectedRowIndexes.count == 1 && tableView.selectedRow < searchResults.count {
+            display(searchResult: searchResults[tableView.selectedRow])
         }
+    }
+
+    fileprivate func display(searchResult: SearchResult) {
+        var text = ""
+        text += "\(searchResult.name)<br />"
+        text += "\(searchResult.description)<br />"
+        text += "Homepage: \(url(searchResult.homepage))<br />"
+        text += "<br />Press URL to start download:<br />\(url(searchResult.url.absoluteString))"
+        
+        let html = "<span style=\"font-family: -apple-system; font-size: 13; color:\(NSColor.labelColorHexString);\">\(text)</span>"
+        
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue]
+        
+        if let data = html.data(using: .utf8),
+            let string = NSAttributedString(html: data, options: options, documentAttributes: nil)
+        {
+            statusTextField.attributedStringValue = string
+        }
+    }
+    
+    fileprivate func url(_ href: String) -> String {
+        var href = href // mutable copy
+        if href.last == "/" {
+            href.removeLast()
+        }
+        return "<a href=\"\(href)\" style=\"text-decoration:none;\">\(href)</a>"
     }
 }
 
@@ -209,73 +205,23 @@ extension ViewController: SearchDelegate {
         showAlert(messageText: messageText, informativeText: informativeText)
     }
     
-    func resetSearchResults(statusText: String) {
-        DispatchQueue.main.async {
-            self.searchResults = []
-            self.tableView.reloadData()
-            self.searchStartedByButtonPress = false
-            self.statusTextField.stringValue = statusText
-        }
-    }
-    
     func display(searchResults: [SearchResult]) {
-        DispatchQueue.main.async {
-            self.searchResults = searchResults
-            self.tableView.reloadData()
-            self.button.isEnabled = true
-            
-            self.statusTextField.stringValue = "\(searchResults.count) result"
-            if searchResults.count > 1 {
-                self.statusTextField.stringValue = self.statusTextField.stringValue + "s"
-            }
-            
-            if self.searchStartedByButtonPress {
-                if searchResults.count > 0 {
-                    self.tableView.window?.makeFirstResponder(self.tableView)
-                    self.tableView.selectRowIndexes(NSIndexSet(index: 0) as IndexSet, byExtendingSelection: false)
-                    self.updateButtonState()
-                }
-                self.searchStartedByButtonPress = false
-            }
-        }
-    }
-}
+        self.searchResults = searchResults
+        self.tableView.reloadData()
+        self.button.isEnabled = true
 
-// MARK: - DownloadLocationDelegate
-    
-extension ViewController: DownloadLocationDelegate
-{
-    func downloadLocationError(messageText: String, informativeText: String) {
-        showAlert(messageText: messageText, informativeText: informativeText)
-    }
-    
-    func downloadLocationFound(url: URL, name: String?, description: String?, homepage: String?) {
-        var text = ""
-        if let name = name {
-            text += "\(name)<br />"
+        self.statusTextField.stringValue = "\(searchResults.count) result"
+        if searchResults.count > 1 {
+            self.statusTextField.stringValue = self.statusTextField.stringValue + "s"
         }
-        if let description = description {
-            text += "\(description)<br />"
-        }
-        if let homepage = homepage {
-            text += "<a href=\"\(homepage)\">\(homepage)</a><br />"
-        }
-        text += "<br />Press URL to start download:<br /><a href=\"\(url.absoluteString)\">\(url.absoluteString)</a>"
-        
-        let html = "<span style=\"font-family:'\(Self.font.fontName)'; font-size:\(Self.font.pointSize); color:\(NSColor.labelColorHexString);\">\(text)</span>"
-        
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue]
-        
-        if let data = html.data(using: .utf8),
-            let string = NSAttributedString(html: data, options: options, documentAttributes: nil)
-        {
-            statusTextField.attributedStringValue = string
-        }
-        
-        // show pointing finger cursor when hovering over url by simulating a selection in the text field
-        statusTextField.selectText(nil)
-        if let editor = statusTextField.currentEditor() {
-            editor.selectedRange = NSMakeRange(0, 0)
+
+        if self.searchStartedByButtonPress {
+            if searchResults.count > 0 {
+                self.tableView.window?.makeFirstResponder(self.tableView)
+                self.tableView.selectRowIndexes(NSIndexSet(index: 0) as IndexSet, byExtendingSelection: false)
+                self.updateButtonState()
+            }
+            self.searchStartedByButtonPress = false
         }
     }
 }

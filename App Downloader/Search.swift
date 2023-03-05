@@ -2,7 +2,7 @@
 //  Search.swift
 //  AppDownloader
 //
-//  Copyright (C) 2017-2020 Jahn Bertsch
+//  Copyright (C) 2017-2023 Jahn Bertsch
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -21,100 +21,97 @@
 
 import Foundation
 
-protocol SearchDelegate: class {
+protocol SearchDelegate: AnyObject {
     func searchError(messageText: String, informativeText: String)
-    func resetSearchResults(statusText: String)
     func display(searchResults: [SearchResult])
 }
 
-class Search: SearchProtocol {
-    private let config: URLSessionConfiguration
-    private let session: URLSession
+class Search {
+    public weak var delegate: SearchDelegate?
     
-    public weak var delegate: SearchDelegate? = nil
+    private let caskJsonURL = URL(string: "https://formulae.brew.sh/api/cask.json")!
+    private var caskInfoArray: [Any]?
     
     init() {
-        config = URLSessionConfiguration.default
-        session = URLSession(configuration: config)
+        let dataTask = URLSession.shared.dataTask(with: caskJsonURL, completionHandler: caskJsonDownloadCompletionHandler)
+        dataTask.resume() // start cask json download
     }
     
     func startSearch(searchString: String) {
-        if let url = URL(string: "https://api.github.com/search/code?q=repo:homebrew/homebrew-cask+" + searchString) {
-            let task = session.dataTask(with: url, completionHandler: searchCompletionHandler)
-            task.resume() // do the search
+        guard let caskInfoArray = caskInfoArray else {
+            delegate?.searchError(messageText: "Search Failed", informativeText: "Search index not available.")
+            return
         }
+        
+        var searchResults: [SearchResult] = []
+
+        for caskInfo in caskInfoArray {
+            if let caskInfo = caskInfo as? [String: Any] {
+                if let searchResult = search(for: searchString, in: caskInfo) {
+                    searchResults.append(searchResult)
+                }
+            } else {
+                delegate?.searchError(messageText: "Processing search index failed", informativeText: "Could not convert cask info to dictionary.")
+                break
+            }
+        }
+        
+        sortByName(&searchResults)
+        delegate?.display(searchResults: searchResults) // search done
+    }
+    
+    fileprivate func search(for searchString: String, in caskInfo: [String: Any]) -> SearchResult? {
+        if let names       = caskInfo["name"] as? [String],
+           let description = caskInfo["desc"] as? String,
+           let homepage    = caskInfo["homepage"] as? String,
+           let urlString   = caskInfo["url"] as? String,
+           let sha256      = caskInfo["sha256"] as? String,
+           let url = URL(string: urlString)
+        {
+            var displayName = ""
+            for name in names {
+                if name.lowercased().contains(searchString) {
+                    displayName = name
+                }
+            }
+            if description.lowercased().contains(searchString) && displayName == "" {
+                displayName = names.first ?? "Unknown Name"
+            }
+            
+            if displayName != "" {
+                return SearchResult(name: displayName, description: description, homepage: homepage, url: url, sha256: sha256)
+            }
+        }
+
+        return nil
     }
     
     // MARK: - private
     
-    fileprivate func searchCompletionHandler(data: Data?, response: URLResponse?, error: Error?) {
+    fileprivate func caskJsonDownloadCompletionHandler(data: Data?, response: URLResponse?, error: Error?) {
+        guard response != nil else {
+            delegate?.searchError(messageText: "Downloading search index failed", informativeText: "You have to be connected to the Internet to search.")
+            return
+        }
+        
         if let error = error {
-            delegate?.searchError(messageText: "Search Error", informativeText: error.localizedDescription)
+            delegate?.searchError(messageText: "Downloading search index failed", informativeText: error.localizedDescription)
         } else if let data = data {
             do {
-                if let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] {
-                    handle(jsonObject: jsonObject)
+                let jsonObject = try JSONSerialization.jsonObject(with: data)
+                if let jsonArray = jsonObject as? [Any] {
+                    caskInfoArray = jsonArray
                 } else {
-                    delegate?.searchError(messageText: "Search Error", informativeText: "JSON decoding of search result failed")
+                    delegate?.searchError(messageText: "Processing search index failed", informativeText: "Could not convert cask JSON to array.")
                 }
             } catch {
-                delegate?.searchError(messageText: "Search Error", informativeText: "JSON decoding of search result failed: \(error.localizedDescription)")
+                delegate?.searchError(messageText: "Decoding search index failed", informativeText: error.localizedDescription)
             }
         } else {
-            delegate?.searchError(messageText: "Search Error", informativeText: "No data received.")
+            delegate?.searchError(messageText: "Downloading search index failed", informativeText: "No data received.")
         }
-    }
-    
-    fileprivate func handle(jsonObject: [String: AnyObject]) {
-        let jsonSearchResults = extractJsonSearchResults(jsonObject)
-        var searchResults = extractSearchResults(jsonSearchResults)
-        sortByName(&searchResults)
-        delegate?.display(searchResults: searchResults) // done
     }
 
-    fileprivate func extractJsonSearchResults(_ json: [String : AnyObject]) -> NSArray {
-        var jsonSearchResults = NSArray()
-        
-        if let totalCount = json["total_count"] as? Int {
-            if totalCount == 0 {
-                delegate?.resetSearchResults(statusText: "No search results")
-            } else {
-                for (key, value) in json {
-                    if key == "items",
-                        let jsonSearchResultsArray = value as? NSArray
-                    {
-                        jsonSearchResults = jsonSearchResultsArray
-                    }
-                }
-            }
-        } else {
-            delegate?.resetSearchResults(statusText: "No search results")
-        }
-        
-        return jsonSearchResults
-    }
-    
-    fileprivate func extractSearchResults(_ jsonSearchResultItemsArray: NSArray) -> [SearchResult] {
-        var searchResults: [SearchResult] = []
-        
-        for itemArrayElement in jsonSearchResultItemsArray {
-            if let item = itemArrayElement as? [String: AnyObject],
-                let name = item["name"] as? String
-            {
-                let index = name.index(name.endIndex, offsetBy: -3)
-                if name[index...] == ".rb",
-                    let urlString = item["url"] as? String,
-                    let url = URL(string: urlString)
-                {
-                    let searchResult = SearchResult(name: String(name[..<index]), url: url)
-                    searchResults.append(searchResult)
-                }
-            }
-        }
-
-        return searchResults
-    }
-    
     fileprivate func sortByName(_ searchResults: inout [SearchResult]) {
         searchResults.sort { (a, b) -> Bool in
             if a.name < b.name {
