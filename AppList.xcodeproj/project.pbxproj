@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0086EFA42F1A17CE006F6610 /* AppList.icon in Resources */ = {isa = PBXBuildFile; fileRef = 0086EFA32F1A17CE006F6610 /* AppList.icon */; };
 		0149A2A529B404DC008467B1 /* Color+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0149A2A429B404DC008467B1 /* Color+HexString.swift */; };
 		0D4503741E2431CC00F5F4FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503731E2431CC00F5F4FE /* AppDelegate.swift */; };
 		0D4503761E2431CC00F5F4FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4503751E2431CC00F5F4FE /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0086EFA32F1A17CE006F6610 /* AppList.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppList.icon; sourceTree = "<group>"; };
 		0149A2A429B404DC008467B1 /* Color+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HexString.swift"; sourceTree = "<group>"; };
 		0D4503701E2431CC00F5F4FE /* AppList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D4503731E2431CC00F5F4FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,7 +61,7 @@
 			children = (
 				0DB50FA71E7BECD000403196 /* README.md */,
 				0DB50FA51E7BEB9C00403196 /* LICENSE */,
-				0D4503721E2431CC00F5F4FE /* App Downloader */,
+				0D4503721E2431CC00F5F4FE /* AppList */,
 				0D4503711E2431CC00F5F4FE /* Products */,
 				1397261D2587E8D000551302 /* Frameworks */,
 			);
@@ -73,7 +75,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0D4503721E2431CC00F5F4FE /* App Downloader */ = {
+		0D4503721E2431CC00F5F4FE /* AppList */ = {
 			isa = PBXGroup;
 			children = (
 				0D4503731E2431CC00F5F4FE /* AppDelegate.swift */,
@@ -82,9 +84,10 @@
 				0149A2A429B404DC008467B1 /* Color+HexString.swift */,
 				0D4503861E24328700F5F4FE /* Main.storyboard */,
 				0D4503771E2431CC00F5F4FE /* Assets.xcassets */,
+				0086EFA32F1A17CE006F6610 /* AppList.icon */,
 				0D45037C1E2431CC00F5F4FE /* Info.plist */,
 			);
-			path = "App Downloader";
+			path = AppList;
 			sourceTree = "<group>";
 		};
 		1397261D2587E8D000551302 /* Frameworks */ = {
@@ -164,6 +167,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0086EFA42F1A17CE006F6610 /* AppList.icon in Resources */,
 				0DB50FA61E7BEB9C00403196 /* LICENSE in Resources */,
 				0D4503781E2431CC00F5F4FE /* Assets.xcassets in Resources */,
 				0D4503881E24328700F5F4FE /* Main.storyboard in Resources */,
@@ -313,14 +317,14 @@
 		0D4503801E2431CC00F5F4FE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppList;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 2AD47BTDQ6;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = "App Downloader/Info.plist";
+				INFOPLIST_FILE = AppList/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
@@ -334,14 +338,14 @@
 		0D4503811E2431CC00F5F4FE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppList;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 2AD47BTDQ6;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = "App Downloader/Info.plist";
+				INFOPLIST_FILE = AppList/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
