@@ -174,7 +174,6 @@ extension ViewController: NSTableViewDataSource {
         text += "\(searchResult.name)<br />"
         text += "\(searchResult.description)<br />"
         text += "Homepage: \(url(searchResult.homepage))<br />"
-        text += "<br />Press URL to start download:<br />\(url(searchResult.url.absoluteString))"
         
         let html = "<span style=\"font-family: -apple-system; font-size: 13; color:\(NSColor.labelColorHexString);\">\(text)</span>"
         
