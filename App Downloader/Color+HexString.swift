@@ -1,6 +1,6 @@
 //
 //  Color+HexString.swift
-//  App Downloader
+//  AppList
 //
 //  Created by Jahn Bertsch on 04.03.23.
 //

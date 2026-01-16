@@ -180,7 +180,7 @@
 
 /* Begin PBXFileReference section */
 		0149A2A429B404DC008467B1 /* Color+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HexString.swift"; sourceTree = "<group>"; };
-		0D4503701E2431CC00F5F4FE /* App Downloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Downloader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D4503701E2431CC00F5F4FE /* AppList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D4503731E2431CC00F5F4FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D4503751E2431CC00F5F4FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0D4503771E2431CC00F5F4FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 		0D4503711E2431CC00F5F4FE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0D4503701E2431CC00F5F4FE /* App Downloader.app */,
+				0D4503701E2431CC00F5F4FE /* AppList.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -289,9 +289,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0D45036F1E2431CC00F5F4FE /* App Downloader */ = {
+		0D45036F1E2431CC00F5F4FE /* AppList */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0D45037F1E2431CC00F5F4FE /* Build configuration list for PBXNativeTarget "App Downloader" */;
+			buildConfigurationList = 0D45037F1E2431CC00F5F4FE /* Build configuration list for PBXNativeTarget "AppList" */;
 			buildPhases = (
 				0D45036C1E2431CC00F5F4FE /* Sources */,
 				0D45036D1E2431CC00F5F4FE /* Frameworks */,
@@ -302,9 +302,9 @@
 			);
 			dependencies = (
 			);
-			name = "App Downloader";
+			name = AppList;
 			productName = "App Downloader";
-			productReference = 0D4503701E2431CC00F5F4FE /* App Downloader.app */;
+			productReference = 0D4503701E2431CC00F5F4FE /* AppList.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -318,6 +318,7 @@
 				TargetAttributes = {
 					0D45036F1E2431CC00F5F4FE = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 2AD47BTDQ6;
 						LastSwiftMigration = 1220;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -331,7 +332,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0D45036B1E2431CC00F5F4FE /* Build configuration list for PBXProject "App Downloader" */;
+			buildConfigurationList = 0D45036B1E2431CC00F5F4FE /* Build configuration list for PBXProject "AppList" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -354,7 +355,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				0D45036F1E2431CC00F5F4FE /* App Downloader */,
+				0D45036F1E2431CC00F5F4FE /* AppList */,
 			);
 		};
 /* End PBXProject section */
@@ -661,14 +662,14 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2AD47BTDQ6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "App Downloader/Info.plist";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0.5;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.github.yep.App-Downloader";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.yep.AppList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -682,14 +683,14 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2AD47BTDQ6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "App Downloader/Info.plist";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0.5;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.github.yep.App-Downloader";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.yep.AppList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -698,7 +699,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0D45036B1E2431CC00F5F4FE /* Build configuration list for PBXProject "App Downloader" */ = {
+		0D45036B1E2431CC00F5F4FE /* Build configuration list for PBXProject "AppList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0D45037D1E2431CC00F5F4FE /* Debug */,
@@ -707,7 +708,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0D45037F1E2431CC00F5F4FE /* Build configuration list for PBXNativeTarget "App Downloader" */ = {
+		0D45037F1E2431CC00F5F4FE /* Build configuration list for PBXNativeTarget "AppList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0D4503801E2431CC00F5F4FE /* Debug */,

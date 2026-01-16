@@ -1,4 +1,4 @@
-# App Downloader
+# App List
 
 
 Search for macOS® apps in the [homebrew cask](https://formulae.brew.sh/cask)
@@ -29,7 +29,7 @@ Get the latest version from the [release page](https://github.com/yep/app-downlo
 ## License
 
 
-    Copyright (C) 2017-2023 Jahn Bertsch
+    Copyright (C) 2017-2026 Jahn Bertsch
   
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

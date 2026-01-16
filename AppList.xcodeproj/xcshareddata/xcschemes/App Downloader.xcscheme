@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0D45036F1E2431CC00F5F4FE"
-               BuildableName = "App Downloader.app"
-               BlueprintName = "App Downloader"
-               ReferencedContainer = "container:App Downloader.xcodeproj">
+               BuildableName = "AppList.app"
+               BlueprintName = "AppList"
+               ReferencedContainer = "container:AppList.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0D45036F1E2431CC00F5F4FE"
-            BuildableName = "App Downloader.app"
-            BlueprintName = "App Downloader"
-            ReferencedContainer = "container:App Downloader.xcodeproj">
+            BuildableName = "AppList.app"
+            BlueprintName = "AppList"
+            ReferencedContainer = "container:AppList.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0D45036F1E2431CC00F5F4FE"
-            BuildableName = "App Downloader.app"
-            BlueprintName = "App Downloader"
-            ReferencedContainer = "container:App Downloader.xcodeproj">
+            BuildableName = "AppList.app"
+            BlueprintName = "AppList"
+            ReferencedContainer = "container:AppList.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
